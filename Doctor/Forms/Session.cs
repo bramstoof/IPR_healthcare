@@ -377,5 +377,10 @@ namespace Doctor {
 
             UpdateThread.Abort();
         }
+
+        private void btnAstrand_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

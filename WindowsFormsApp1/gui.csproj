@@ -77,6 +77,7 @@
     <Compile Include="Forms\Console.Designer.cs">
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPR.cs" />
     <Compile Include="Kettler.cs" />
     <Compile Include="Forms\Login.cs">
       <SubType>Form</SubType>

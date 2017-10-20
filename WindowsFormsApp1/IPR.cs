@@ -8,5 +8,6 @@ namespace Remote_Healtcare_Console
 {
     class IPR
     {
+
     }
 }

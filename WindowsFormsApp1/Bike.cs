@@ -167,5 +167,10 @@ namespace Remote_Healtcare_Console
 
             SetDataToGUI();
         }
+
+        public void AvansAstrand()
+        {
+
+        }
     }
 }
