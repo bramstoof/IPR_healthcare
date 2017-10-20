@@ -170,7 +170,61 @@ namespace Remote_Healtcare_Console
 
         public void AvansAstrand()
         {
+            
+        }
 
+        
+
+        public double correctieFactorLeeftijd(int leeftijd)
+        {
+            double factor;
+
+            if (leeftijd <= 15)
+                factor = 1.10;
+            else if (leeftijd <= 25)
+                factor = 1;
+            else if (leeftijd <= 35)
+                factor = 0.87;
+            else if (leeftijd <= 40)
+                factor = 0.83;
+            else if (leeftijd <= 45)
+                factor = 0.87;
+            else if (leeftijd <= 50)
+                factor = 0.75;
+            else if (leeftijd <= 55)
+                factor = 0.71;
+            else if (leeftijd <= 60)
+                factor = 0.68;
+            else if (leeftijd <= 65)
+                factor = 0.65;
+            else
+                factor = 0.65;
+
+            return factor;
+        }
+
+        public double correctieFactorHartfrequentie(int hartfrequentie)
+        {
+            double factor;
+
+            if (hartfrequentie >= 210)
+                factor = 1.12;
+            else if (hartfrequentie >= 200)
+                factor = 1;
+            else if (hartfrequentie >= 190)
+                factor = 0.93;
+            else if (hartfrequentie >= 180)
+                factor = 0.83;
+            else if (hartfrequentie >= 170)
+                factor = 0.75;
+            else if (hartfrequentie >= 160)
+                factor = 0.69;
+            else if (hartfrequentie >= 150)
+                factor = 0.64;
+            else
+                factor = 0.64;
+
+            return factor;
         }
     }
 }
