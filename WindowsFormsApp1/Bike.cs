@@ -17,15 +17,12 @@ namespace Remote_Healtcare_Console
         private bool autoCalculateResistance;
         private bool autoCalculateResistanceNotExactly;
         private List<int> heartrates;
-<<<<<<< HEAD
         private User user;
         private int bikeResistance = 25;
         private double factor;
-=======
         private int hartfrequentie;
         private int Resistance = 25;
         private bool Busy;
->>>>>>> astrad
 
         public Bike(string port, User user, Console console, Client client) : base(console) {
             this.client = client;
