@@ -17,9 +17,13 @@ namespace Remote_Healtcare_Console
         private bool autoCalculateResistance;
         private bool autoCalculateResistanceNotExactly;
         private List<int> heartrates;
+        private User user;
+        private int bikeResistance = 25;
+        private double factor;
 
-        public Bike(string port, Console console, Client client) : base(console) {
+        public Bike(string port, User user, Console console, Client client) : base(console) {
             this.client = client;
+            this.user = user;
             start = false;
             serialCommunicator = new SerialCommunicator(port);
             BikeThread = new Thread(InitBike);
@@ -182,7 +186,17 @@ namespace Remote_Healtcare_Console
 
         public void CalculateVO2MAX()
         {
-
+            double VO2MAX = 0;
+            if(user.isMan)
+            {
+                VO2MAX = (174.2 * bikeResistance + 4020) / (103.2 * AverageHeartBeatRate() - 6299);
+                VO2MAX *= factor;
+            }
+            else
+            {
+                VO2MAX = (163.8 * bikeResistance + 3780) / (104.4 * AverageHeartBeatRate() - 7514);
+                VO2MAX *= factor;
+            }
         }
 
         public double CorrectieFactorLeeftijd(int leeftijd)

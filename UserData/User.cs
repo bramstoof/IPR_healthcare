@@ -11,8 +11,8 @@ namespace UserData {
         private string password;
         private string hashcode;
         public string FullName { get; set; }
-        private DateTime Birthday;
-        private bool isMan;
+        public DateTime Birthday;
+        public bool isMan;
         public UserType Type { get; set; }
 
         [Newtonsoft.Json.JsonConstructor]
