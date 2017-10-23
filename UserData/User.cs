@@ -11,30 +11,38 @@ namespace UserData {
         private string password;
         private string hashcode;
         public string FullName { get; set; }
+        private DateTime Birthday;
+        private bool isMan;
         public UserType Type { get; set; }
 
         [Newtonsoft.Json.JsonConstructor]
-        public User(string username, string password, string fullName, string hashcode, UserType type) {
+        public User(string username, string password, string fullName, string hashcode, string birthday, bool isMan, UserType type) {
             this.username = username;
             this.password = password;
             this.FullName = fullName;
             this.hashcode = hashcode;
+            this.Birthday = DateTime.Parse(birthday);
+            this.isMan = isMan;
             this.Type = type;
         }
 
-        public User(string username, string password, string fullName) {
+        public User(string username, string password, string fullName, bool man, string birthday) {
             this.username = username;
             this.password = password;
             this.FullName = fullName;
+            this.Birthday = DateTime.Parse(birthday);
+            this.isMan = isMan;
             this.Type = UserType.Client;
             makeHashcodeValid(Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes(DateTime.UtcNow.Ticks.ToString() + username))));
         }
 
-        public User(string username, string password, string fullName, UserType type) {
+        public User(string username, string password, string fullName, bool man, string birthday, UserType type) {
             this.username = username;
             this.password = password;
             this.FullName = fullName;
             this.Type = type;
+            this.Birthday = DateTime.Parse(birthday);
+            this.isMan = isMan;
             string test = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes(DateTime.UtcNow.Ticks.ToString() + username)));
             makeHashcodeValid(test);
         }
