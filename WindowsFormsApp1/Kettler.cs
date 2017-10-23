@@ -33,7 +33,6 @@ namespace Remote_Healtcare_Console
                     // Running on the UI thread
                     console.SetPulse(bikeData.Pulse.ToString());
                     console.SetRoundMin(bikeData.Rpm.ToString());
-                    console.SetSpeed(bikeData.Speed.ToString());
                     console.SetDistance((bikeData.Distance * 100).ToString());
                     console.SetResistance(bikeData.Resistance.ToString());
                     console.SetEnergy(bikeData.Energy.ToString());
