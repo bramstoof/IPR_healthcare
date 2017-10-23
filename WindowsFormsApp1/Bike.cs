@@ -18,7 +18,6 @@ namespace Remote_Healtcare_Console
         private bool autoCalculateResistanceNotExactly;
         private List<int> heartrates;
         private User user;
-        private int bikeResistance = 25;
         private double factor;
         private int hartfrequentie;
         private int Resistance = 25;
@@ -249,12 +248,12 @@ namespace Remote_Healtcare_Console
             double VO2MAX = 0;
             if(user.isMan)
             {
-                VO2MAX = (174.2 * bikeResistance + 4020) / (103.2 * AverageHeartBeatRate() - 6299);
+                VO2MAX = (174.2 * Resistance + 4020) / (103.2 * AverageHeartBeatRate() - 6299);
                 VO2MAX *= factor;
             }
             else
             {
-                VO2MAX = (163.8 * bikeResistance + 3780) / (104.4 * AverageHeartBeatRate() - 7514);
+                VO2MAX = (163.8 * Resistance + 3780) / (104.4 * AverageHeartBeatRate() - 7514);
                 VO2MAX *= factor;
             }
         }
