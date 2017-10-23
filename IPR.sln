@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "WindowsFormsApp1\GUI.csproj", "{5E73D397-1A19-450F-944C-7C87261CFE3C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR", "VR\VR.csproj", "{0E89495E-98D7-45DE-998C-995C28AF520F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{E9FD6EE8-F544-4C9D-AF42-6033D2DDF97B}"
 EndProject
@@ -15,7 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doctor", "Doctor\Doctor.csp
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		UserData\UserData.projitems*{0e89495e-98d7-45de-998c-995c28af520f}*SharedItemsImports = 4
 		UserData\UserData.projitems*{251213d5-8916-4db8-ab7f-a4022bb23969}*SharedItemsImports = 4
 		UserData\UserData.projitems*{4d4db2c8-d2ce-43dd-9f9f-0e0aa2184b85}*SharedItemsImports = 13
 		UserData\UserData.projitems*{5e73d397-1a19-450f-944c-7c87261cfe3c}*SharedItemsImports = 4
@@ -30,10 +27,6 @@ Global
 		{5E73D397-1A19-450F-944C-7C87261CFE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E73D397-1A19-450F-944C-7C87261CFE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E73D397-1A19-450F-944C-7C87261CFE3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E89495E-98D7-45DE-998C-995C28AF520F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E89495E-98D7-45DE-998C-995C28AF520F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E89495E-98D7-45DE-998C-995C28AF520F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E89495E-98D7-45DE-998C-995C28AF520F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9FD6EE8-F544-4C9D-AF42-6033D2DDF97B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9FD6EE8-F544-4C9D-AF42-6033D2DDF97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9FD6EE8-F544-4C9D-AF42-6033D2DDF97B}.Release|Any CPU.ActiveCfg = Release|Any CPU

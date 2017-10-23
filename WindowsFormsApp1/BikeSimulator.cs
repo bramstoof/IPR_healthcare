@@ -44,7 +44,6 @@ namespace Remote_Healtcare_Console
                         // Running on the UI thread
                         console.SetPulse(data.ElementAt(count).Pulse.ToString());
                         console.SetRoundMin(data.ElementAt(count).Rpm.ToString());
-                        console.SetSpeed(data.ElementAt(count).Speed.ToString());
                         console.SetDistance((data.ElementAt(count).Distance * 100).ToString());
                         console.SetResistance(data.ElementAt(count).Resistance.ToString());
                         console.SetEnergy(data.ElementAt(count).Energy.ToString());
