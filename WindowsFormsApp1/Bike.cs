@@ -17,9 +17,15 @@ namespace Remote_Healtcare_Console
         private bool autoCalculateResistance;
         private bool autoCalculateResistanceNotExactly;
         private List<int> heartrates;
+<<<<<<< HEAD
         private User user;
         private int bikeResistance = 25;
         private double factor;
+=======
+        private int hartfrequentie;
+        private int Resistance = 25;
+        private bool Busy;
+>>>>>>> astrad
 
         public Bike(string port, User user, Console console, Client client) : base(console) {
             this.client = client;
@@ -72,6 +78,63 @@ namespace Remote_Healtcare_Console
             ChangesThread.Start();
         }
 
+        private void AstradHandler()
+        {
+            if (Busy)
+            {
+                BikeData latestData = RecordedData.Last();
+                if (latestData.Time.Minutes < 2)
+                {
+                    if (Resistance == 60)
+                        RpmCheck(latestData.Rpm);
+                    else
+                    {
+                        Resistance = 60;
+                        SetResistance(Resistance);
+                    }
+
+                }
+                else if (latestData.Time.Minutes < 6)
+                {
+                    if (latestData.Pulse > hartfrequentie)
+                        Busy = true;
+
+                    int minutes = latestData.Time.Minutes;
+                    if (minutes < 4)
+                    {
+                        int seconds = latestData.Time.Seconds;
+                        if (seconds % 10 == 0 && latestData.Pulse < 130 && Resistance < 180)
+                            SetResistance(Resistance += 15);
+                    }
+                    else
+                        RpmCheck(latestData.Rpm);
+                }
+                else
+                    if (Busy)
+                    {
+                        AverageHeartBeatRate();
+                        CalculateVO2MAX();
+                        SetResistance(25);
+                        // cool down
+                        Busy = false;
+                    }
+            }
+        }
+
+        private void RpmCheck(int rpm) {
+            if (rpm <= 50)
+            {
+                //go faster
+            }
+            else if (rpm >= 60)
+            {
+                //go slower
+            }
+            else
+            {
+                //ga zo door
+            }
+        }
         public override void Stop() {
             start = false;
             serialCommunicator.CloseConnection();
@@ -227,7 +290,7 @@ namespace Remote_Healtcare_Console
             return factor;
         }
 
-        public double CorrectieFactorHartfrequentie(int hartfrequentie)
+        public double CorrectieFactorHartfrequentie()
         {
             double factor;
 
