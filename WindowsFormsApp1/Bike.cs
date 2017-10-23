@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UserData;
@@ -15,6 +16,7 @@ namespace Remote_Healtcare_Console
         private string hashcode;
         private bool autoCalculateResistance;
         private bool autoCalculateResistanceNotExactly;
+        private List<int> heartrates;
 
         public Bike(string port, Console console, Client client) : base(console) {
             this.client = client;
@@ -173,9 +175,17 @@ namespace Remote_Healtcare_Console
             
         }
 
-        
+        public int AverageHeartBeatRate()
+        {
+            return (int)heartrates.Average();
+        }
 
-        public double correctieFactorLeeftijd(int leeftijd)
+        public void CalculateVO2MAX()
+        {
+
+        }
+
+        public double CorrectieFactorLeeftijd(int leeftijd)
         {
             double factor;
 
@@ -203,7 +213,7 @@ namespace Remote_Healtcare_Console
             return factor;
         }
 
-        public double correctieFactorHartfrequentie(int hartfrequentie)
+        public double CorrectieFactorHartfrequentie(int hartfrequentie)
         {
             double factor;
 
