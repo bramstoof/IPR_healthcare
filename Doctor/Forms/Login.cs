@@ -14,6 +14,7 @@ namespace Doctor {
 
         public Login() {
             InitializeComponent();
+            this.Text = "Inloggen doktor";
         }
 
         private void BLog_in_Click(object sender, EventArgs e) {

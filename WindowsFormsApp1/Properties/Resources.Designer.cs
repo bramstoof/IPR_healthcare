@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Doctor.Properties {
+namespace Remote_Healtcare_Console.Properties {
     using System;
     
     
@@ -57,6 +57,16 @@ namespace Doctor.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap beach_wallpaper_090612883_305 {
+            get {
+                object obj = ResourceManager.GetObject("beach-wallpaper_090612883_305", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Remote_Healtcare_Console.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace Remote_Healtcare_Console
         public Login()
         {
             InitializeComponent();
+            this.Text = "Inloggen GUI";
         }
 
         private void BLog_in_Click(object sender, EventArgs e)
@@ -50,6 +52,7 @@ namespace Remote_Healtcare_Console
                 if (result.Equals("True")) {
                     this.Hide();
                     Form Form1 = new Console(client);
+                    Form Form2 = new Astrand();
                     Form1.Closed += (s, args) => this.Close();
                     Form1.Show();
                 }

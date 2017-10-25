@@ -45,7 +45,7 @@
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(77, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 52);
+            this.label1.Size = new System.Drawing.Size(211, 65);
             this.label1.TabIndex = 0;
             this.label1.Text = "Inloggen";
             // 
@@ -54,7 +54,7 @@
             this.txtUsername.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.Location = new System.Drawing.Point(164, 97);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(116, 23);
+            this.txtUsername.Size = new System.Drawing.Size(116, 27);
             this.txtUsername.TabIndex = 1;
             // 
             // txtPassword
@@ -63,16 +63,16 @@
             this.txtPassword.Location = new System.Drawing.Point(164, 148);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(116, 23);
+            this.txtPassword.Size = new System.Drawing.Size(116, 27);
             this.txtPassword.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 98);
+            this.label2.Location = new System.Drawing.Point(22, 97);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 18);
+            this.label2.Size = new System.Drawing.Size(139, 24);
             this.label2.TabIndex = 3;
             this.label2.Text = "Gebruikersnaam";
             // 
@@ -82,7 +82,7 @@
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(48, 149);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 18);
+            this.label3.Size = new System.Drawing.Size(113, 24);
             this.label3.TabIndex = 4;
             this.label3.Text = "Wachtwoord";
             // 
@@ -99,7 +99,7 @@
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 270);
             this.Controls.Add(this.BLog_in);
