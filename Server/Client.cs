@@ -57,9 +57,7 @@ namespace Server {
                         this.User = user;
                         dynamic response = new {
                             access = true,
-                            fullname = user.FullName,
-                            doctortype = user.Type,
-                            hashcode = hash
+                            user = user
                         };
                         writeMessage(response);
                         found = true;
@@ -428,7 +426,7 @@ namespace Server {
                 int clientType = (int)data["type"];
                 bool isman = (bool)data["man"];
                 DateTime fixedBirthday = new DateTime(1997, 9, 25);
-                User tempUser = new User(username, password, fullName, isman, fixedBirthday.ToString() ,(UserType)clientType );
+                User tempUser = new User(username, password, fullName,  fixedBirthday.ToString() ,isman, (UserType)clientType );
 
                 bool exists = false;
                 lock (usersLock) {
@@ -446,7 +444,7 @@ namespace Server {
                 }
 
                 if (!exists) {
-                    users.Add(new User(username, password, fullName, isman, fixedBirthday.ToString(), (UserType)clientType));
+                    users.Add(new User(username, password, fullName,  fixedBirthday.ToString(), isman, (UserType)clientType));
                     dynamic response = new {
                         status = "ok"
                     };

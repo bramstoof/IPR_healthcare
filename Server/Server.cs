@@ -51,9 +51,9 @@ namespace Server {
                 {
                     DateTime time = new DateTime(0);
                     string username = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes("admin")));
-                    users.Add(new User(username, username, "Root", true, time.ToString(), UserType.Doctor));
+                    users.Add(new User(username, username, "Root",  time.ToString(), true, UserType.Doctor));
                     username = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes("test")));
-                    users.Add(new User(username, username, "Patient", true, time.ToString(), UserType.Client));
+                    users.Add(new User(username, username, "Patient",  time.ToString(), true, UserType.Client));
                     File.WriteAllText(usersPath, JsonConvert.SerializeObject(users));
                 }
             }
