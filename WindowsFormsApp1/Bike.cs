@@ -21,18 +21,15 @@ namespace Remote_Healtcare_Console
         private double factor;
         private int hartfrequentie;
         private int Resistance = 25;
-        private bool startTest = false;
         private bool Busy;
 
-        public Bike(string port, Console console, User user, ref Client client) : base(console) {
+        public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
             this.user = user;
             start = false;
-            heartrates = new List<int>();
             serialCommunicator = new SerialCommunicator(port);
             BikeThread = new Thread(InitBike);
             ChangesThread = new Thread(changes);
-            CorrectieFactorHartfrequentie();
         }
 
         private void changes()
@@ -82,10 +79,7 @@ namespace Remote_Healtcare_Console
             if (Busy)
             {
                 BikeData latestData = RecordedData.Last();
-                int minutes = latestData.Time.Minutes;
-                if(latestData.Pulse > hartfrequentie)
-                    SetResistance(Resistance -= 15);
-                if (minutes < 2)
+                if (latestData.Time.Minutes < 2)
                 {
                     if (Resistance == 60)
                         RpmCheck(latestData.Rpm);
@@ -96,38 +90,30 @@ namespace Remote_Healtcare_Console
                     }
 
                 }
-                else if (minutes < 6)
+                else if (latestData.Time.Minutes < 6)
                 {
                     if (latestData.Pulse > hartfrequentie)
-                        Busy = false;
-                    int seconds = latestData.Time.Seconds;
+                        Busy = true;
+
+                    int minutes = latestData.Time.Minutes;
                     if (minutes < 4)
                     {
-                        if (seconds % 10 == 0 && latestData.Pulse > 130 && Resistance < 180)
+                        int seconds = latestData.Time.Seconds;
+                        if (seconds % 10 == 0 && latestData.Pulse < 130 && Resistance < 180)
                             SetResistance(Resistance += 15);
                     }
                     else
-                    {
-                        if (seconds % 15 == 0)
-                        {
-                            heartrates.Add(latestData.Pulse);
-                        }
-                    }
-                    RpmCheck(latestData.Rpm);
-                }
-                else if (minutes < 7)
-                {
-                    AverageHeartBeatRate();
-                    CalculateVO2MAX();
-                    SetResistance(25);
-                    // cool down
-                    Busy = false;
+                        RpmCheck(latestData.Rpm);
                 }
                 else
-                {
-                    //klaar
-                    Busy = false;
-                }
+                    if (Busy)
+                    {
+                        AverageHeartBeatRate();
+                        CalculateVO2MAX();
+                        SetResistance(25);
+                        // cool down
+                        Busy = false;
+                    }
             }
         }
 
@@ -234,8 +220,6 @@ namespace Remote_Healtcare_Console
             else if (RecordedData.Last().Time != bikeData.Time) {
                 RecordedData.Add(bikeData);
             }
-            if (startTest)
-                AstradHandler();
             
             client.SendMessage(new
             {
@@ -262,7 +246,7 @@ namespace Remote_Healtcare_Console
         public void CalculateVO2MAX()
         {
             double VO2MAX = 0;
-            if(user.isMan)
+            if(user.Man)
             {
                 VO2MAX = (174.2 * Resistance + 4020) / (103.2 * AverageHeartBeatRate() - 6299);
                 VO2MAX *= factor;
