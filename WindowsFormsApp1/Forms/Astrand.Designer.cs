@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_faseDesc = new System.Windows.Forms.Label();
             this.lbl_currentFase = new System.Windows.Forms.Label();
             this.lbl_timeLeftDesc = new System.Windows.Forms.Label();
             this.lbl_TimeLeft = new System.Windows.Forms.Label();
+            this.timerTimeLeft = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +92,11 @@
             this.lbl_TimeLeft.TabIndex = 4;
             this.lbl_TimeLeft.Text = "[00:00:00]";
             // 
+            // timerTimeLeft
+            // 
+            this.timerTimeLeft.Interval = 1000;
+            this.timerTimeLeft.Tick += new System.EventHandler(this.timerTimeLeft_Tick);
+            // 
             // Astrand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -115,5 +122,6 @@
         private System.Windows.Forms.Label lbl_currentFase;
         private System.Windows.Forms.Label lbl_timeLeftDesc;
         private System.Windows.Forms.Label lbl_TimeLeft;
+        private System.Windows.Forms.Timer timerTimeLeft;
     }
 }

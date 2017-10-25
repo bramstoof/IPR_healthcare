@@ -84,22 +84,22 @@ namespace Doctor
                 }
                 else
                 {
-                    MessageBox.Show("Uw gebruikersnaam en wachtwoord komen niet overeen");
+                    MessageBox.Show("Uw gebruikersnaam en wachtwoord komen niet overeen","Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
                 if (txtUsername.Text == "")
                 {
-                    MessageBox.Show("Vul het gebruikersnaam veld in");
+                    MessageBox.Show("Vul het gebruikersnaam veld in", "Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if (txtPassword.Text == "")
                 {
-                    MessageBox.Show("Vul het Wachtwoord veld in");
+                    MessageBox.Show("Vul het Wachtwoord veld in", "Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Vul de velden in");
+                    MessageBox.Show("Vul de velden in", "Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

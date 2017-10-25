@@ -12,10 +12,17 @@ namespace Remote_Healtcare_Console.Forms
 {
     public partial class Astrand : Form
     {
+        int timeLeft = 2;
+        int timeLeftInSeconds;
+        int displaySeconds = 60;
+
+
+
         public Astrand()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            timeLeftInSeconds = timeLeft * 60;
 
             //making lbl_faseDesc transparent
             var poslblFase = this.PointToScreen(lbl_faseDesc.Location);
@@ -44,11 +51,42 @@ namespace Remote_Healtcare_Console.Forms
             lbl_TimeLeft.Parent = pictureBox1;
             lbl_TimeLeft.Location = poslblTimeLeft;
             lbl_TimeLeft.BackColor = Color.Transparent;
+
+            timerTimeLeft.Start();
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timerTimeLeft_Tick(object sender, EventArgs e)
+        {
+            if (timeLeftInSeconds > 0)
+            {
+                if(timeLeftInSeconds % 60 == 0)
+                {
+                    displaySeconds = 60;
+                    timeLeft -= 1;
+                    timeLeftInSeconds -= 1;
+                    displaySeconds -= 1;
+                    lbl_TimeLeft.Text = timeLeft + " minuten en " + displaySeconds + " seconden";
+                }
+                else
+                {
+                    timeLeftInSeconds -= 1;
+                    displaySeconds -= 1;
+                    lbl_TimeLeft.Text = timeLeft + " minuten en " + displaySeconds + " seconden";
+                }
+            }
+            else
+            {
+                // If the user ran out of time, stop the timer, show
+                // a MessageBox, and fill in the answers.
+                timerTimeLeft.Stop();
+                lbl_TimeLeft.Text = "Time's up!";
+                MessageBox.Show("You didn't finish in time.", "Sorry!");
+            }
         }
     }
 }

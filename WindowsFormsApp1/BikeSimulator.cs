@@ -42,13 +42,13 @@ namespace Remote_Healtcare_Console
                 try {
                     console.Invoke((MethodInvoker)delegate {
                         // Running on the UI thread
-                        console.SetPulse(data.ElementAt(count).Pulse.ToString());
-                        console.SetRoundMin(data.ElementAt(count).Rpm.ToString());
-                        console.SetDistance((data.ElementAt(count).Distance * 100).ToString());
-                        console.SetResistance(data.ElementAt(count).Resistance.ToString());
-                        console.SetEnergy(data.ElementAt(count).Energy.ToString());
-                        console.SetTime(((data.ElementAt(count).Time < TimeSpan.Zero) ? "-" : "") + data.ElementAt(count).Time.ToString(@"mm\:ss"));
-                        console.SetWatt(data.ElementAt(count).Power.ToString());
+                        //console.SetPulse(data.ElementAt(count).Pulse.ToString());
+                        //console.SetRoundMin(data.ElementAt(count).Rpm.ToString());
+                        //console.SetDistance((data.ElementAt(count).Distance * 100).ToString());
+                        //console.SetResistance(data.ElementAt(count).Resistance.ToString());
+                        //console.SetEnergy(data.ElementAt(count).Energy.ToString());
+                        //console.SetTime(((data.ElementAt(count).Time < TimeSpan.Zero) ? "-" : "") + data.ElementAt(count).Time.ToString(@"mm\:ss"));
+                        //console.SetWatt(data.ElementAt(count).Power.ToString());
                     });
                 }
                 catch (System.InvalidOperationException e) {

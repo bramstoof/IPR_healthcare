@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UserData;
 using System.Threading;
+using Remote_Healtcare_Console.Forms;
 
 namespace Remote_Healtcare_Console
 {
@@ -17,21 +18,35 @@ namespace Remote_Healtcare_Console
         public string path;
         public ISet<BikeData> data;
         private Client client;
+        int timeLeft;
 
         public Console(Client client)
         {
             InitializeComponent();
+            this.Text = "Console";
             this.client = client;
             combo = comPorts;
             combo.Items.Clear();
             combo.Items.Add("Simulator");
             combo.Items.AddRange(SerialPort.GetPortNames());
+
+            comboBoxGeslacht.Items.Add("Man");
+            comboBoxGeslacht.Items.Add("Vrouw");
+            comboBoxGeslacht.Items.Add("Overig");
         }
 
         private void BStart_Click(object sender, EventArgs e)
         {
             combo.Focus();
-            if (combo.SelectedItem.Equals("Simulator")){
+            if (combo.SelectedItem == null)
+            {
+                string message = "Kies een simulator of COM poort";
+                string caption = "Error Detected in Input";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBox.Show(message, caption, buttons, icon);
+            }
+            else if (combo.SelectedItem.Equals("Simulator")){
 
                 OpenFileDialog browseFileDialog = new OpenFileDialog();
                 browseFileDialog.Filter = "JSON (.json)|*.json;";
@@ -48,6 +63,9 @@ namespace Remote_Healtcare_Console
 
                 bike = new BikeSimulator(this);
                 bike.Start();
+                Form Form1 = new Astrand();
+                Form1.Closed += (s, args) => this.Close();
+                Form1.Show();
             }
             else
             {
@@ -64,19 +82,6 @@ namespace Remote_Healtcare_Console
             base.OnFormClosed(e);
         }
 
-        public void SetPulse(String s){ lblPulse.Text = s; }
-
-        public void SetRoundMin(String s) { lblRoundMin.Text = s; }
-
-        public void SetDistance(String s) { lblDistance.Text = s; }
-
-        public void SetResistance(String s) { lblResistence.Text = s; }
-
-        public void SetEnergy(String s) { lblEnergy.Text = s; }
-
-        public void SetTime(String s) { lblTime.Text = s; }
-
-        public void SetWatt(String s) { lblWatt.Text = s; }
 
         public void AddMessage(String value)
         {
@@ -91,6 +96,11 @@ namespace Remote_Healtcare_Console
         private void Closing(object sender, FormClosingEventArgs e)
         {
             client.SendMessage("bye");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

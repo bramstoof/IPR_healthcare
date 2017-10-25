@@ -52,18 +52,17 @@ namespace Remote_Healtcare_Console
                 if (result.Equals("True")) {
                     this.Hide();
                     Form Form1 = new Console(client);
-                    Form Form2 = new Astrand();
                     Form1.Closed += (s, args) => this.Close();
                     Form1.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Ingevulde gegevens zijn onjuist");
+                    MessageBox.Show("Ingevulde gegevens zijn onjuist", "Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Vul de velden in");
+                MessageBox.Show("Vul de velden in", "Error Tijdens het inloggen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
