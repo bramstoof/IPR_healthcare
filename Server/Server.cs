@@ -49,10 +49,11 @@ namespace Server {
                 }
                 else
                 {
+                    DateTime time = new DateTime(0);
                     string username = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes("admin")));
-                    users.Add(new User(username, username, "Root", UserType.Doctor));
+                    users.Add(new User(username, username, "Root", true, time.ToString(), UserType.Doctor));
                     username = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes("test")));
-                    users.Add(new User(username, username, "Patient", UserType.Client));
+                    users.Add(new User(username, username, "Patient", true, time.ToString(), UserType.Client));
                     File.WriteAllText(usersPath, JsonConvert.SerializeObject(users));
                 }
             }

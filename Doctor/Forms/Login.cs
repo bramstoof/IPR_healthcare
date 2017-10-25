@@ -49,7 +49,7 @@ namespace Doctor {
                 if (result == true) {
                     UserType type = (UserType)((int)jObject["doctortype"]);
                     if (type == UserType.Doctor) {
-                        Credentials = new User(user.username, user.password, (string)jObject["fullname"], (string)jObject["hashcode"], UserType.Client);
+                        Credentials = (User)jObject["user"].ToObject(typeof(User));
                     }
                     else {
                         MessageBox.Show("This is not a Doctor account, please use the Client Application");

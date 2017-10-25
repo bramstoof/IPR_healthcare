@@ -151,6 +151,9 @@ namespace Server {
                 case "changeuser":
                     new Thread(() => changeUsername((JObject)obj["data"])).Start();
                     break;
+                case "startTest":
+                    new Thread(() => startTest());
+                    break;
                 case "power":
                     new Thread(() => setPower((JObject)obj["data"])).Start();
                     break;
@@ -160,6 +163,7 @@ namespace Server {
                 case "disconnect":
                     closeStream();
                     break;
+                    
             }
         }
 
@@ -173,6 +177,13 @@ namespace Server {
         //        }
         //    }
         //}
+        private void startTest()
+        {
+            foreach (Client user in connectedClients)
+            {
+                new Thread(() => user.writeMessage("startAstrand")).Start();
+            }
+        }
 
         private void sendLatestData(JObject data) {
             lock (connectedClientsLock) {
@@ -415,7 +426,9 @@ namespace Server {
                 string password = (string)data["password"];
                 string fullName = (string)data["fullname"];
                 int clientType = (int)data["type"];
-                User tempUser = new User(username, password, fullName, (UserType)clientType);
+                bool isman = (bool)data["man"];
+                DateTime fixedBirthday = new DateTime(1997, 9, 25);
+                User tempUser = new User(username, password, fullName, isman, fixedBirthday.ToString() ,(UserType)clientType );
 
                 bool exists = false;
                 lock (usersLock) {
@@ -433,7 +446,7 @@ namespace Server {
                 }
 
                 if (!exists) {
-                    users.Add(new User(username, password, fullName, (UserType)clientType));
+                    users.Add(new User(username, password, fullName, isman, fixedBirthday.ToString(), (UserType)clientType));
                     dynamic response = new {
                         status = "ok"
                     };

@@ -380,7 +380,14 @@ namespace Doctor {
 
         private void btnAstrand_Click(object sender, EventArgs e)
         {
-
+            client.SendMessage(new
+            {
+                id = "startTest",
+                data = new
+                {
+                    hashcode = patient.Hashcode
+                }
+            });
         }
     }
 }

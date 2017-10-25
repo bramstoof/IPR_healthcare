@@ -21,7 +21,7 @@ namespace UserData {
             this.password = password;
             this.FullName = fullName;
             this.hashcode = hashcode;
-            this.Birthday = DateTime.Parse(birthday);
+            //this.Birthday = DateTime.Parse(birthday);
             this.isMan = isMan;
             this.Type = type;
         }
