@@ -53,6 +53,41 @@ namespace Remote_Healtcare_Console.Forms
             lbl_TimeLeft.Parent = pictureBox1;
             lbl_TimeLeft.Location = poslblTimeLeft;
             lbl_TimeLeft.BackColor = Color.Transparent;
+
+            //making lbl_RPMDesc transparant
+            var poslblRPMDesc = this.PointToScreen(lbl_RPMDesc.Location);
+            poslblRPMDesc = pictureBox1.PointToClient(poslblRPMDesc);
+            lbl_RPMDesc.Parent = pictureBox1;
+            lbl_RPMDesc.Location = poslblRPMDesc;
+            lbl_RPMDesc.BackColor = Color.Transparent;
+
+            //making lbl_RPMActual transparent
+            var poslblRPMActual = this.PointToScreen(lbl_RPMActual.Location);
+            poslblRPMActual = pictureBox1.PointToClient(poslblRPMActual);
+            lbl_RPMActual.Parent = pictureBox1;
+            lbl_RPMActual.Location = poslblRPMActual;
+            lbl_RPMActual.BackColor = Color.Transparent;
+
+            //making pic_ArrowUp transparent
+            var posArrowUp = this.PointToScreen(pic_ArrowUp.Location);
+            posArrowUp = pictureBox1.PointToClient(posArrowUp);
+            pic_ArrowUp.Parent = pictureBox1;
+            pic_ArrowUp.Location = posArrowUp;
+            pic_ArrowUp.BackColor = Color.Transparent;
+
+            //making pic_ArrowDown transparent
+            var posArrowDown = this.PointToScreen(pic_ArrowDown.Location);
+            posArrowDown = pictureBox1.PointToClient(posArrowDown);
+            pic_ArrowDown.Parent = pictureBox1;
+            pic_ArrowDown.Location = posArrowDown;
+            pic_ArrowDown.BackColor = Color.Transparent;
+
+            //making pic_CheckMark transparent
+            var posCheckMark = this.PointToScreen(pic_CheckMark.Location);
+            posCheckMark = pictureBox1.PointToClient(posCheckMark);
+            pic_CheckMark.Parent = pictureBox1;
+            pic_CheckMark.Location = posCheckMark;
+            pic_CheckMark.BackColor = Color.Transparent;
         }
 
         private void timerTimeLeft_Tick(object sender, EventArgs e)
@@ -103,7 +138,7 @@ namespace Remote_Healtcare_Console.Forms
 
         public void setMinutesLeft(int minutes)
         {
-
+            timeLeft = minutes;
         }
 
         public void startMinutesLeftTimer()
@@ -113,17 +148,64 @@ namespace Remote_Healtcare_Console.Forms
 
         public void resistanceUp()
         {
+            if (pic_CheckMark.InvokeRequired || pic_ArrowUp.InvokeRequired || pic_ArrowDown.InvokeRequired)
+            {
+                pic_CheckMark.BeginInvoke((MethodInvoker)delegate () { pic_CheckMark.Hide(); ; });
+                pic_ArrowDown.BeginInvoke((MethodInvoker)delegate () { pic_ArrowDown.Hide(); ; });
+                pic_ArrowUp.BeginInvoke((MethodInvoker)delegate () { pic_ArrowUp.Show(); ; });
 
+            }
+            else
+            {
+                pic_CheckMark.Hide();
+                pic_ArrowDown.Hide();
+                pic_ArrowUp.Show();
+            }
         }
 
         public void resistanceDown()
         {
-
+            if (pic_CheckMark.InvokeRequired || pic_ArrowUp.InvokeRequired || pic_ArrowDown.InvokeRequired)
+            {
+                pic_CheckMark.BeginInvoke((MethodInvoker)delegate () { pic_CheckMark.Hide(); ; });
+                pic_ArrowUp.BeginInvoke((MethodInvoker)delegate () { pic_ArrowUp.Hide(); ; });
+                pic_ArrowDown.BeginInvoke((MethodInvoker)delegate () { pic_ArrowDown.Show(); ; });
+            }
+            else
+            {
+                pic_CheckMark.Hide();
+                pic_ArrowUp.Hide();
+                pic_ArrowDown.Show();
+            }
         }
 
         public void resistenceGood()
         {
+            if (pic_CheckMark.InvokeRequired || pic_ArrowUp.InvokeRequired || pic_ArrowDown.InvokeRequired)
+            {
+                pic_ArrowUp.BeginInvoke((MethodInvoker)delegate () { pic_ArrowUp.Hide();});
+                pic_ArrowDown.BeginInvoke((MethodInvoker)delegate () { pic_ArrowDown.Hide();});
+                pic_CheckMark.BeginInvoke((MethodInvoker)delegate () { pic_CheckMark.Show();});
+            }
+            else
+            {
+                pic_ArrowUp.Hide();
+                pic_ArrowDown.Hide();
+                pic_CheckMark.Show();
+            }
+            
+        }
 
+        public void setRPM(int rpm)
+        {
+            if (this.lbl_RPMActual.InvokeRequired)
+            {
+                this.lbl_RPMActual.BeginInvoke((MethodInvoker)delegate () { this.lbl_RPMActual.Text = rpm.ToString();});
+            }
+            else
+            {
+                this.lbl_RPMActual.Text = rpm.ToString();
+            }
         }
     }
 }

@@ -145,6 +145,15 @@
   <ItemGroup>
     <None Include="Resources\Post-it-note-transparent.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_Down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow_Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkmark_green.png" />
+  </ItemGroup>
   <Import Project="..\UserData\UserData.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

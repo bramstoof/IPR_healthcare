@@ -27,6 +27,12 @@ namespace Remote_Healtcare_Console
         private bool startTest = false;
         private bool AstrandWFAisNotActive = false;
         Astrand FormAstrand;
+        private bool opwarmFaseBegin;
+        private bool testFasebegin;
+        private bool testFaseUitbreidingBegin = true;
+        private bool coolingDownFaseBegin;
+        private int timeTestDone = 6;
+        private bool startStandby;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -95,6 +101,13 @@ namespace Remote_Healtcare_Console
                 BikeData latestData = RecordedData.Last();
                 if (latestData.Time.Minutes < 2)
                 {
+                    //setting remaining time in GUI
+                    if (!opwarmFaseBegin)
+                    {
+                        opwarmFaseBegin = true;
+                        FormAstrand.setMinutesLeft(2);
+                    }
+
                     FormAstrand.SetFaseText("Opwarming");
 
                     if (Resistance == 60)
@@ -104,49 +117,76 @@ namespace Remote_Healtcare_Console
                         Resistance = 60;
                         SetResistance(Resistance);
                     }
-
-                    
                 }
-                else if (latestData.Time.Minutes < 6)
+                else if (latestData.Time.Minutes < timeTestDone)
                 {
-                    if (latestData.Pulse > hartfrequentie)
-                        Busy = false;
-
-                    int minutes = latestData.Time.Minutes;
-                    if (minutes < 4)
+                    if (!startStandby)
                     {
-                        int seconds = latestData.Time.Seconds;
-                        if (seconds % 10 == 0 && latestData.Pulse < 130 && Resistance < 180)
-                            SetResistance(Resistance += 15);
+                        //int Pulse = latestData.Pulse;
+                        int Pulse = 120; // aanpassen via GUI !!!!!!!
+
+
+                        FormAstrand.SetFaseText("Test");
+                        if (latestData.Pulse > hartfrequentie)
+                            Busy = false;
+
+                        int minutes = latestData.Time.Minutes;
+                        if (minutes < 4)
+                        {
+                            //setting remaining time in GUI
+                            if (testFasebegin)
+                            {
+                                testFasebegin = true;
+                                FormAstrand.setMinutesLeft(4);
+                            }
+
+                            int seconds = latestData.Time.Seconds;
+                            if (seconds % 10 == 0 && latestData.Pulse < 130 && Resistance < 180)
+                            {
+                                SetResistance(Resistance += 15);
+                            }
+
+                            else
+                                testFaseUitbreidingBegin = false;
+                        }
+                        RpmCheck(latestData.Rpm);
                     }
                     else
-                        RpmCheck(latestData.Rpm);
-                }
-                else
+                    {
+
+                    }
+
                     if (Busy)
                     {
+                        FormAstrand.SetFaseText("Cooling down");
                         AverageHeartBeatRate();
                         CalculateVO2MAX();
                         SetResistance(25);
                         // cool down
                         Busy = false;
                     }
+                }
             }
         }
 
         private void RpmCheck(int rpm) {
+            FormAstrand.setRPM(rpm);
             if (rpm <= 50)
             {
                 //go faster
+                FormAstrand.resistanceUp();
             }
             else if (rpm >= 60)
             {
                 //go slower
+                FormAstrand.resistanceDown();
             }
             else
             {
                 //ga zo door
+                FormAstrand.resistenceGood();
             }
+
         }
         public override void Stop() {
             start = false;
