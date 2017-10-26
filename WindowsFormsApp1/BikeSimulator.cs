@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Remote_Healtcare_Console.Forms;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,12 +18,16 @@ namespace Remote_Healtcare_Console
         private Thread BikeThread;
         private ISet<BikeData> data;
         private int count;
+        private Astrand FormAstrand;
 
         public BikeSimulator(Console console) : base(console) {
             this.console = console;
             data = console.data;
             count = 0;
             BikeThread = new Thread(Update);
+            FormAstrand = new Astrand();
+            FormAstrand.Closed += (s, args) => FormAstrand.Close();
+            FormAstrand.Show();
         }
 
         public override void Reset() {
