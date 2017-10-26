@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using UserData;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Remote_Healtcare_Console.Forms;
 
 namespace Doctor {
     public partial class Session : Form {
@@ -382,9 +383,10 @@ namespace Doctor {
         {
             client.SendMessage(new
             {
-                id = "startTest",
+                id = "chat",
                 data = new
                 {
+                    message = "true",
                     hashcode = patient.Hashcode
                 }
             });

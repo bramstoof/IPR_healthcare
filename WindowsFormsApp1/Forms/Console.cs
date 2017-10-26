@@ -63,9 +63,6 @@ namespace Remote_Healtcare_Console
 
                 bike = new BikeSimulator(this);
                 bike.Start();
-                Form Form1 = new Astrand();
-                Form1.Closed += (s, args) => this.Close();
-                Form1.Show();
             }
             else
             {
@@ -75,6 +72,7 @@ namespace Remote_Healtcare_Console
                 bike = new Bike(combo.SelectedItem.ToString(), new User( "bram", "bram", "bram", true, "1997-9-25"),this, ref client);
                 bike.Start();
             }
+
         }
         
         protected override void OnFormClosed(FormClosedEventArgs e) {

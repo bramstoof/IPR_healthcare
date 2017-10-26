@@ -15,11 +15,13 @@ namespace Remote_Healtcare_Console.Forms
         int timeLeft = 2;
         int timeLeftInSeconds;
         int displaySeconds = 60;
-
+        private Boolean testTimerRunning;
+        public bool startTest{ get; set; }
 
 
         public Astrand()
         {
+            startTest = false;
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             timeLeftInSeconds = timeLeft * 60;
@@ -51,13 +53,6 @@ namespace Remote_Healtcare_Console.Forms
             lbl_TimeLeft.Parent = pictureBox1;
             lbl_TimeLeft.Location = poslblTimeLeft;
             lbl_TimeLeft.BackColor = Color.Transparent;
-
-            timerTimeLeft.Start();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void timerTimeLeft_Tick(object sender, EventArgs e)
@@ -87,6 +82,48 @@ namespace Remote_Healtcare_Console.Forms
                 lbl_TimeLeft.Text = "Time's up!";
                 MessageBox.Show("You didn't finish in time.", "Sorry!");
             }
+        }
+
+        public void SetFaseText(String text)
+        {
+            if (this.lbl_currentFase.InvokeRequired)
+            {
+                this.lbl_currentFase.BeginInvoke((MethodInvoker)delegate () { this.lbl_currentFase.Text = text; ; });
+            }
+            else
+            {
+                this.lbl_currentFase.Text = text; ;
+            }
+        }
+
+        private void btn_startTest_Click(object sender, EventArgs e)
+        {
+            startTest = true;
+        }
+
+        public void setMinutesLeft(int minutes)
+        {
+
+        }
+
+        public void startMinutesLeftTimer()
+        {
+            timerTimeLeft.Start();
+        }
+
+        public void resistanceUp()
+        {
+
+        }
+
+        public void resistanceDown()
+        {
+
+        }
+
+        public void resistenceGood()
+        {
+
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Remote_Healtcare_Console.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using UserData;
 
 namespace Remote_Healtcare_Console
@@ -21,7 +23,10 @@ namespace Remote_Healtcare_Console
         private double factor;
         private int hartfrequentie;
         private int Resistance = 25;
-        private bool Busy;
+        private bool Busy = true;
+        private bool startTest = false;
+        private bool AstrandWFAisNotActive = false;
+        Astrand FormAstrand;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -30,6 +35,10 @@ namespace Remote_Healtcare_Console
             serialCommunicator = new SerialCommunicator(port);
             BikeThread = new Thread(InitBike);
             ChangesThread = new Thread(changes);
+            //Astrand Form1 = new Astrand();
+            FormAstrand = new Astrand();
+            FormAstrand.Closed += (s, args) => FormAstrand.Close();
+            FormAstrand.Show();
         }
 
         private void changes()
@@ -53,6 +62,7 @@ namespace Remote_Healtcare_Console
                     break;
                 case ("chat"):
                     string message = (string)obj["data"]["message"];
+                    AstrandWFAisNotActive = (bool)obj["data"]["message"];
                     new Thread(() => console.AddMessage(message)).Start();
                     break;
                 case "setdoctor":
@@ -64,6 +74,10 @@ namespace Remote_Healtcare_Console
                 case ("stop"):
                     BikeThread.Abort();
                     break;
+                case ("startTest"):
+                    AstrandWFAisNotActive = (bool)obj["data"]["message"];
+                    startTest = (bool)obj["data"]["message"];
+                    break;
             }
 
         }
@@ -74,13 +88,15 @@ namespace Remote_Healtcare_Console
             ChangesThread.Start();
         }
 
-        private void AstradHandler()
+        private void AstradAvans()
         {
             if (Busy)
             {
                 BikeData latestData = RecordedData.Last();
                 if (latestData.Time.Minutes < 2)
                 {
+                    FormAstrand.SetFaseText("Opwarming");
+
                     if (Resistance == 60)
                         RpmCheck(latestData.Rpm);
                     else
@@ -89,11 +105,12 @@ namespace Remote_Healtcare_Console
                         SetResistance(Resistance);
                     }
 
+                    
                 }
                 else if (latestData.Time.Minutes < 6)
                 {
                     if (latestData.Pulse > hartfrequentie)
-                        Busy = true;
+                        Busy = false;
 
                     int minutes = latestData.Time.Minutes;
                     if (minutes < 4)
@@ -220,6 +237,10 @@ namespace Remote_Healtcare_Console
             else if (RecordedData.Last().Time != bikeData.Time) {
                 RecordedData.Add(bikeData);
             }
+
+            
+                AstradAvans();
+            
             
             client.SendMessage(new
             {
@@ -231,11 +252,6 @@ namespace Remote_Healtcare_Console
             });
 
             SetDataToGUI();
-        }
-
-        public void AvansAstrand()
-        {
-            
         }
 
         public int AverageHeartBeatRate()

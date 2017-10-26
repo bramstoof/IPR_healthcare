@@ -150,7 +150,7 @@ namespace Server {
                     new Thread(() => changeUsername((JObject)obj["data"])).Start();
                     break;
                 case "startTest":
-                    new Thread(() => startTest());
+                    new Thread(() => sendPM((JObject)obj["data"])).Start();
                     break;
                 case "power":
                     new Thread(() => setPower((JObject)obj["data"])).Start();

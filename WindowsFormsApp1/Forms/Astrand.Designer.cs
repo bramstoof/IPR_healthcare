@@ -29,23 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_faseDesc = new System.Windows.Forms.Label();
             this.lbl_currentFase = new System.Windows.Forms.Label();
             this.lbl_timeLeftDesc = new System.Windows.Forms.Label();
             this.lbl_TimeLeft = new System.Windows.Forms.Label();
             this.timerTimeLeft = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Remote_Healtcare_Console.Properties.Resources.beach_wallpaper_090612883_305;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1081, 554);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lbl_faseDesc
             // 
@@ -68,7 +59,6 @@
             this.lbl_currentFase.Size = new System.Drawing.Size(115, 48);
             this.lbl_currentFase.TabIndex = 2;
             this.lbl_currentFase.Text = "[FASE]";
-            this.lbl_currentFase.Click += new System.EventHandler(this.label1_Click);
             // 
             // lbl_timeLeftDesc
             // 
@@ -96,6 +86,15 @@
             // 
             this.timerTimeLeft.Interval = 1000;
             this.timerTimeLeft.Tick += new System.EventHandler(this.timerTimeLeft_Tick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Remote_Healtcare_Console.Properties.Resources.beach_wallpaper_090612883_305;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1081, 554);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Astrand
             // 

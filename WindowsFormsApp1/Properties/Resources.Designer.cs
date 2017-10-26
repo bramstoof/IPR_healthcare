@@ -69,5 +69,15 @@ namespace Remote_Healtcare_Console.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Post_it_note_transparent {
+            get {
+                object obj = ResourceManager.GetObject("Post-it-note-transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

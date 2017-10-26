@@ -73,7 +73,6 @@
             this.patientName = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.sessionDate = new System.Windows.Forms.Label();
-            this.btnAstrand = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.lblFase = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Resistance_Track_Bar)).BeginInit();
@@ -82,12 +81,12 @@
             // 
             // Start_Session_Btn
             // 
-            this.Start_Session_Btn.Location = new System.Drawing.Point(723, 17);
-            this.Start_Session_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Start_Session_Btn.Location = new System.Drawing.Point(673, 17);
+            this.Start_Session_Btn.Margin = new System.Windows.Forms.Padding(4);
             this.Start_Session_Btn.Name = "Start_Session_Btn";
-            this.Start_Session_Btn.Size = new System.Drawing.Size(95, 28);
+            this.Start_Session_Btn.Size = new System.Drawing.Size(145, 28);
             this.Start_Session_Btn.TabIndex = 0;
-            this.Start_Session_Btn.Text = "Start sessie";
+            this.Start_Session_Btn.Text = "Start Astrand test";
             this.Start_Session_Btn.UseVisualStyleBackColor = true;
             this.Start_Session_Btn.Click += new System.EventHandler(this.Start_Session_Btn_Click);
             // 
@@ -342,7 +341,7 @@
             // Resistance_Track_Bar
             // 
             this.Resistance_Track_Bar.Location = new System.Drawing.Point(727, 383);
-            this.Resistance_Track_Bar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Resistance_Track_Bar.Margin = new System.Windows.Forms.Padding(4);
             this.Resistance_Track_Bar.Maximum = 100;
             this.Resistance_Track_Bar.Name = "Resistance_Track_Bar";
             this.Resistance_Track_Bar.Size = new System.Drawing.Size(209, 56);
@@ -368,7 +367,7 @@
             // Message_Txt_Box
             // 
             this.Message_Txt_Box.Location = new System.Drawing.Point(16, 581);
-            this.Message_Txt_Box.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Message_Txt_Box.Margin = new System.Windows.Forms.Padding(4);
             this.Message_Txt_Box.Multiline = true;
             this.Message_Txt_Box.Name = "Message_Txt_Box";
             this.Message_Txt_Box.Size = new System.Drawing.Size(591, 27);
@@ -377,7 +376,7 @@
             // Send_Message_Btn
             // 
             this.Send_Message_Btn.Location = new System.Drawing.Point(616, 581);
-            this.Send_Message_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Send_Message_Btn.Margin = new System.Windows.Forms.Padding(4);
             this.Send_Message_Btn.Name = "Send_Message_Btn";
             this.Send_Message_Btn.Size = new System.Drawing.Size(100, 28);
             this.Send_Message_Btn.TabIndex = 56;
@@ -388,11 +387,11 @@
             // Stop_Session_Btn
             // 
             this.Stop_Session_Btn.Location = new System.Drawing.Point(836, 17);
-            this.Stop_Session_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Stop_Session_Btn.Margin = new System.Windows.Forms.Padding(4);
             this.Stop_Session_Btn.Name = "Stop_Session_Btn";
             this.Stop_Session_Btn.Size = new System.Drawing.Size(100, 28);
             this.Stop_Session_Btn.TabIndex = 58;
-            this.Stop_Session_Btn.Text = "Stop sessie";
+            this.Stop_Session_Btn.Text = "Stop test";
             this.Stop_Session_Btn.UseVisualStyleBackColor = true;
             this.Stop_Session_Btn.Click += new System.EventHandler(this.Stop_Session_Btn_Click);
             // 
@@ -403,7 +402,7 @@
             legend1.Name = "Legend1";
             this.grafiek.Legends.Add(legend1);
             this.grafiek.Location = new System.Drawing.Point(11, 58);
-            this.grafiek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grafiek.Margin = new System.Windows.Forms.Padding(4);
             this.grafiek.Name = "grafiek";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -440,7 +439,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.Location = new System.Drawing.Point(733, 513);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(209, 89);
             this.button1.TabIndex = 60;
@@ -511,16 +510,6 @@
             this.sessionDate.TabIndex = 66;
             this.sessionDate.Text = "label20";
             // 
-            // btnAstrand
-            // 
-            this.btnAstrand.Location = new System.Drawing.Point(756, 446);
-            this.btnAstrand.Name = "btnAstrand";
-            this.btnAstrand.Size = new System.Drawing.Size(145, 23);
-            this.btnAstrand.TabIndex = 67;
-            this.btnAstrand.Text = "Avans-Astrand test";
-            this.btnAstrand.UseVisualStyleBackColor = true;
-            this.btnAstrand.Click += new System.EventHandler(this.btnAstrand_Click);
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -546,7 +535,6 @@
             this.ClientSize = new System.Drawing.Size(959, 624);
             this.Controls.Add(this.lblFase);
             this.Controls.Add(this.label20);
-            this.Controls.Add(this.btnAstrand);
             this.Controls.Add(this.sessionDate);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.patientName);
@@ -585,7 +573,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Start_Session_Btn);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Session";
             this.Text = "Session";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Closing);
@@ -636,7 +624,6 @@
         private System.Windows.Forms.Label patientName;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label sessionDate;
-        private System.Windows.Forms.Button btnAstrand;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblFase;
     }
