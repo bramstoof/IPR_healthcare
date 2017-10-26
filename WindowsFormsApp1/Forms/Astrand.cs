@@ -18,7 +18,6 @@ namespace Remote_Healtcare_Console.Forms
         private Boolean testTimerRunning;
         public bool startTest{ get; set; }
 
-
         public Astrand()
         {
             startTest = false;
@@ -84,6 +83,18 @@ namespace Remote_Healtcare_Console.Forms
 
             //making pic_CheckMark transparent
             var posCheckMark = this.PointToScreen(pic_CheckMark.Location);
+            posCheckMark = pictureBox1.PointToClient(posCheckMark);
+            pic_CheckMark.Parent = pictureBox1;
+            pic_CheckMark.Location = posCheckMark;
+            pic_CheckMark.BackColor = Color.Transparent;
+
+
+        }
+
+        private void makeThingTransparant(Control control)
+        {
+            string posVar = "pos"+control.ToString();
+            var pos = this.PointToScreen(pic_CheckMark.Location);
             posCheckMark = pictureBox1.PointToClient(posCheckMark);
             pic_CheckMark.Parent = pictureBox1;
             pic_CheckMark.Location = posCheckMark;

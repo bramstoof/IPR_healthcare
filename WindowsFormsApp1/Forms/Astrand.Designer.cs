@@ -40,7 +40,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbl_RPMActual = new System.Windows.Forms.Label();
             this.lbl_RPMDesc = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBx_pulse = new System.Windows.Forms.TextBox();
+            this.lbl_speedDesc = new System.Windows.Forms.Label();
+            this.lbl_weerstandDesc = new System.Windows.Forms.Label();
+            this.lbl_energieDesc = new System.Windows.Forms.Label();
+            this.lbl_WattDesc = new System.Windows.Forms.Label();
+            this.lbl_BPMDesc = new System.Windows.Forms.Label();
+            this.lbl_speed = new System.Windows.Forms.Label();
+            this.lbl_weerstand = new System.Windows.Forms.Label();
+            this.lbl_energie = new System.Windows.Forms.Label();
+            this.lbl_Watt = new System.Windows.Forms.Label();
+            this.lbl_BPM = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pic_CheckMark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_ArrowDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_ArrowUp)).BeginInit();
@@ -54,16 +64,16 @@
             this.lbl_faseDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_faseDesc.Location = new System.Drawing.Point(94, 41);
             this.lbl_faseDesc.Name = "lbl_faseDesc";
-            this.lbl_faseDesc.Size = new System.Drawing.Size(110, 48);
+            this.lbl_faseDesc.Size = new System.Drawing.Size(103, 48);
             this.lbl_faseDesc.TabIndex = 1;
-            this.lbl_faseDesc.Text = "Fase: ";
+            this.lbl_faseDesc.Text = "Fase:";
             // 
             // lbl_currentFase
             // 
             this.lbl_currentFase.AutoSize = true;
             this.lbl_currentFase.BackColor = System.Drawing.Color.Transparent;
             this.lbl_currentFase.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentFase.Location = new System.Drawing.Point(196, 41);
+            this.lbl_currentFase.Location = new System.Drawing.Point(186, 41);
             this.lbl_currentFase.Name = "lbl_currentFase";
             this.lbl_currentFase.Size = new System.Drawing.Size(115, 48);
             this.lbl_currentFase.TabIndex = 2;
@@ -85,7 +95,7 @@
             this.lbl_TimeLeft.AutoSize = true;
             this.lbl_TimeLeft.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TimeLeft.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_TimeLeft.Location = new System.Drawing.Point(177, 103);
+            this.lbl_TimeLeft.Location = new System.Drawing.Point(171, 103);
             this.lbl_TimeLeft.Name = "lbl_TimeLeft";
             this.lbl_TimeLeft.Size = new System.Drawing.Size(184, 48);
             this.lbl_TimeLeft.TabIndex = 4;
@@ -156,20 +166,140 @@
             this.lbl_RPMDesc.TabIndex = 9;
             this.lbl_RPMDesc.Text = "RPM:";
             // 
-            // textBox1
+            // txtBx_pulse
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 500);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = "Pulse";
+            this.txtBx_pulse.Location = new System.Drawing.Point(97, 455);
+            this.txtBx_pulse.Name = "txtBx_pulse";
+            this.txtBx_pulse.Size = new System.Drawing.Size(100, 22);
+            this.txtBx_pulse.TabIndex = 10;
+            this.txtBx_pulse.Text = "130";
+            // 
+            // lbl_speedDesc
+            // 
+            this.lbl_speedDesc.AutoSize = true;
+            this.lbl_speedDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_speedDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_speedDesc.Location = new System.Drawing.Point(94, 164);
+            this.lbl_speedDesc.Name = "lbl_speedDesc";
+            this.lbl_speedDesc.Size = new System.Drawing.Size(174, 48);
+            this.lbl_speedDesc.TabIndex = 11;
+            this.lbl_speedDesc.Text = "Snelheid:";
+            // 
+            // lbl_weerstandDesc
+            // 
+            this.lbl_weerstandDesc.AutoSize = true;
+            this.lbl_weerstandDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_weerstandDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_weerstandDesc.Location = new System.Drawing.Point(94, 221);
+            this.lbl_weerstandDesc.Name = "lbl_weerstandDesc";
+            this.lbl_weerstandDesc.Size = new System.Drawing.Size(207, 48);
+            this.lbl_weerstandDesc.TabIndex = 12;
+            this.lbl_weerstandDesc.Text = "Weerstand:";
+            // 
+            // lbl_energieDesc
+            // 
+            this.lbl_energieDesc.AutoSize = true;
+            this.lbl_energieDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_energieDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_energieDesc.Location = new System.Drawing.Point(94, 282);
+            this.lbl_energieDesc.Name = "lbl_energieDesc";
+            this.lbl_energieDesc.Size = new System.Drawing.Size(152, 48);
+            this.lbl_energieDesc.TabIndex = 13;
+            this.lbl_energieDesc.Text = "Energie:";
+            // 
+            // lbl_WattDesc
+            // 
+            this.lbl_WattDesc.AutoSize = true;
+            this.lbl_WattDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_WattDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_WattDesc.Location = new System.Drawing.Point(94, 343);
+            this.lbl_WattDesc.Name = "lbl_WattDesc";
+            this.lbl_WattDesc.Size = new System.Drawing.Size(104, 48);
+            this.lbl_WattDesc.TabIndex = 14;
+            this.lbl_WattDesc.Text = "Watt:";
+            // 
+            // lbl_BPMDesc
+            // 
+            this.lbl_BPMDesc.AutoSize = true;
+            this.lbl_BPMDesc.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_BPMDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_BPMDesc.Location = new System.Drawing.Point(94, 404);
+            this.lbl_BPMDesc.Name = "lbl_BPMDesc";
+            this.lbl_BPMDesc.Size = new System.Drawing.Size(168, 48);
+            this.lbl_BPMDesc.TabIndex = 15;
+            this.lbl_BPMDesc.Text = "Hartslag:";
+            // 
+            // lbl_speed
+            // 
+            this.lbl_speed.AutoSize = true;
+            this.lbl_speed.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_speed.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_speed.Location = new System.Drawing.Point(258, 164);
+            this.lbl_speed.Name = "lbl_speed";
+            this.lbl_speed.Size = new System.Drawing.Size(158, 48);
+            this.lbl_speed.TabIndex = 16;
+            this.lbl_speed.Text = "[0 KM/H]";
+            // 
+            // lbl_weerstand
+            // 
+            this.lbl_weerstand.AutoSize = true;
+            this.lbl_weerstand.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_weerstand.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_weerstand.Location = new System.Drawing.Point(293, 221);
+            this.lbl_weerstand.Name = "lbl_weerstand";
+            this.lbl_weerstand.Size = new System.Drawing.Size(79, 48);
+            this.lbl_weerstand.TabIndex = 17;
+            this.lbl_weerstand.Text = "[75]";
+            // 
+            // lbl_energie
+            // 
+            this.lbl_energie.AutoSize = true;
+            this.lbl_energie.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_energie.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_energie.Location = new System.Drawing.Point(237, 282);
+            this.lbl_energie.Name = "lbl_energie";
+            this.lbl_energie.Size = new System.Drawing.Size(210, 48);
+            this.lbl_energie.TabIndex = 18;
+            this.lbl_energie.Text = "[100 kJoule]";
+            // 
+            // lbl_Watt
+            // 
+            this.lbl_Watt.AutoSize = true;
+            this.lbl_Watt.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_Watt.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Watt.Location = new System.Drawing.Point(186, 343);
+            this.lbl_Watt.Name = "lbl_Watt";
+            this.lbl_Watt.Size = new System.Drawing.Size(102, 48);
+            this.lbl_Watt.TabIndex = 19;
+            this.lbl_Watt.Text = "[0 W]";
+            // 
+            // lbl_BPM
+            // 
+            this.lbl_BPM.AutoSize = true;
+            this.lbl_BPM.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_BPM.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_BPM.Location = new System.Drawing.Point(253, 404);
+            this.lbl_BPM.Name = "lbl_BPM";
+            this.lbl_BPM.Size = new System.Drawing.Size(186, 48);
+            this.lbl_BPM.TabIndex = 20;
+            this.lbl_BPM.Text = "[666 BPM]";
             // 
             // Astrand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 552);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lbl_BPM);
+            this.Controls.Add(this.lbl_Watt);
+            this.Controls.Add(this.lbl_energie);
+            this.Controls.Add(this.lbl_weerstand);
+            this.Controls.Add(this.lbl_speed);
+            this.Controls.Add(this.lbl_BPMDesc);
+            this.Controls.Add(this.lbl_WattDesc);
+            this.Controls.Add(this.lbl_energieDesc);
+            this.Controls.Add(this.lbl_weerstandDesc);
+            this.Controls.Add(this.lbl_speedDesc);
+            this.Controls.Add(this.txtBx_pulse);
             this.Controls.Add(this.lbl_RPMDesc);
             this.Controls.Add(this.lbl_RPMActual);
             this.Controls.Add(this.pic_CheckMark);
@@ -204,6 +334,16 @@
         private System.Windows.Forms.PictureBox pic_CheckMark;
         private System.Windows.Forms.Label lbl_RPMActual;
         private System.Windows.Forms.Label lbl_RPMDesc;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBx_pulse;
+        private System.Windows.Forms.Label lbl_speedDesc;
+        private System.Windows.Forms.Label lbl_weerstandDesc;
+        private System.Windows.Forms.Label lbl_energieDesc;
+        private System.Windows.Forms.Label lbl_WattDesc;
+        private System.Windows.Forms.Label lbl_BPMDesc;
+        private System.Windows.Forms.Label lbl_speed;
+        private System.Windows.Forms.Label lbl_weerstand;
+        private System.Windows.Forms.Label lbl_energie;
+        private System.Windows.Forms.Label lbl_Watt;
+        private System.Windows.Forms.Label lbl_BPM;
     }
 }
