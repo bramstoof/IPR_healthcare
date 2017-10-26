@@ -30,6 +30,7 @@ namespace Remote_Healtcare_Console
         private int timeTestDone = 6;
         private bool startStandby;
         private bool pauze;
+        private bool testReady;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -96,6 +97,11 @@ namespace Remote_Healtcare_Console
             if (Busy)
             {
                 BikeData latestData = RecordedData.Last();
+                //int Pulse = latestData.Pulse;
+                int Pulse = 120; // aanpassen via GUI !!!!!!!
+                if (Pulse > hartfrequentie)
+                    Busy = false;
+               
                 FormAstrand.setTimer(latestData.Time.ToString());
                 if (latestData.Time.Minutes < 2)
                 {
@@ -112,33 +118,38 @@ namespace Remote_Healtcare_Console
                 }
                 else if (latestData.Time.Minutes < timeTestDone)
                 {
-                    if (!startStandby)
+                    int PulseCheck;
+                    int minutes = latestData.Time.Minutes;
+                    int seconds = latestData.Time.Seconds;
+                    if (testReady)
                     {
-                        //int Pulse = latestData.Pulse;
-                        int Pulse = 120; // aanpassen via GUI !!!!!!!
-
-
-                        FormAstrand.SetFaseText("Test");
-                        if (latestData.Pulse > hartfrequentie)
-                            Busy = false;
-
-                        int minutes = latestData.Time.Minutes;
-                        if (minutes < 4)
+                        PulseCheck = 59;
+                        FormAstrand.SetFaseText("BeginTest");
+                        if (seconds % 10 == 0 && Pulse < 140 && Resistance < 180 && pauze)
                         {
-
-                            int seconds = latestData.Time.Seconds;
-                            if (seconds % 10 == 0 && latestData.Pulse < 140 && Resistance < 180 && pauze)
-                            {
-                                pauze = false;
-                                SetResistance(Resistance += 15);
-                            }
-
-                            if (seconds % 10 == 1)
-                                pauze = true;
+                            pauze = false;
+                            SetResistance(Resistance += 15);
                         }
-                        RpmCheck(latestData.Rpm);
-
+                        if (seconds % 10 == 1)
+                            pauze = true;
+                        if (Pulse < 140)
+                            testReady = true;
                     }
+                    else {
+                        PulseCheck = 15;
+                    if (Pulse < 130)
+                        {
+                        PulseCheck = 0;
+                        timeTestDone += 2;
+                        }
+                    }
+                       
+                    RpmCheck(latestData.Rpm);
+                    if (seconds % PulseCheck == 0)
+                    {
+                        heartrates.Add(latestData.Pulse);
+                    }
+                    
                     
                 }
                 else
