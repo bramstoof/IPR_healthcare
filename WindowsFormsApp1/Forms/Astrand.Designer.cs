@@ -76,25 +76,20 @@
             this.lbl_timeLeftDesc.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_timeLeftDesc.Location = new System.Drawing.Point(94, 103);
             this.lbl_timeLeftDesc.Name = "lbl_timeLeftDesc";
-            this.lbl_timeLeftDesc.Size = new System.Drawing.Size(257, 48);
+            this.lbl_timeLeftDesc.Size = new System.Drawing.Size(89, 48);
             this.lbl_timeLeftDesc.TabIndex = 3;
-            this.lbl_timeLeftDesc.Text = "Tijd resterend:";
+            this.lbl_timeLeftDesc.Text = "Tijd:";
             // 
             // lbl_TimeLeft
             // 
             this.lbl_TimeLeft.AutoSize = true;
             this.lbl_TimeLeft.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TimeLeft.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_TimeLeft.Location = new System.Drawing.Point(342, 103);
+            this.lbl_TimeLeft.Location = new System.Drawing.Point(177, 103);
             this.lbl_TimeLeft.Name = "lbl_TimeLeft";
             this.lbl_TimeLeft.Size = new System.Drawing.Size(184, 48);
             this.lbl_TimeLeft.TabIndex = 4;
             this.lbl_TimeLeft.Text = "[00:00:00]";
-            // 
-            // timerTimeLeft
-            // 
-            this.timerTimeLeft.Interval = 1000;
-            this.timerTimeLeft.Tick += new System.EventHandler(this.timerTimeLeft_Tick);
             // 
             // pic_CheckMark
             // 
@@ -163,10 +158,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(93, 167);
+            this.textBox1.Location = new System.Drawing.Point(83, 500);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "Pulse";
             // 
             // Astrand
             // 

@@ -72,7 +72,7 @@ namespace Remote_Healtcare_Console
                 bike = new Bike(combo.SelectedItem.ToString(), new User( "bram", "bram", "bram", true, "1997-9-25"),this, ref client);
                 bike.Start();
             }
-
+            this.Hide();
         }
         
         protected override void OnFormClosed(FormClosedEventArgs e) {

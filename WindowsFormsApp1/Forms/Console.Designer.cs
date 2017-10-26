@@ -115,9 +115,11 @@
             this.dateTimePickerLeeftijd.Name = "dateTimePickerLeeftijd";
             this.dateTimePickerLeeftijd.Size = new System.Drawing.Size(250, 22);
             this.dateTimePickerLeeftijd.TabIndex = 28;
+            this.dateTimePickerLeeftijd.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // comboBoxGeslacht
             // 
+            this.comboBoxGeslacht.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGeslacht.FormattingEnabled = true;
             this.comboBoxGeslacht.Location = new System.Drawing.Point(97, 117);
             this.comboBoxGeslacht.Name = "comboBoxGeslacht";
@@ -138,6 +140,7 @@
             // 
             // maskedTextBox_gewicht
             // 
+            this.maskedTextBox_gewicht.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
             this.maskedTextBox_gewicht.Location = new System.Drawing.Point(97, 155);
             this.maskedTextBox_gewicht.Mask = "000";
             this.maskedTextBox_gewicht.Name = "maskedTextBox_gewicht";

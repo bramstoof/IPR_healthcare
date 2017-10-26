@@ -24,7 +24,7 @@ namespace Remote_Healtcare_Console.Forms
             startTest = false;
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            timeLeftInSeconds = timeLeft * 60;
+            
 
             //making lbl_faseDesc transparent
             var poslblFase = this.PointToScreen(lbl_faseDesc.Location);
@@ -90,35 +90,6 @@ namespace Remote_Healtcare_Console.Forms
             pic_CheckMark.BackColor = Color.Transparent;
         }
 
-        private void timerTimeLeft_Tick(object sender, EventArgs e)
-        {
-            if (timeLeftInSeconds > 0)
-            {
-                if(timeLeftInSeconds % 60 == 0)
-                {
-                    displaySeconds = 60;
-                    timeLeft -= 1;
-                    timeLeftInSeconds -= 1;
-                    displaySeconds -= 1;
-                    lbl_TimeLeft.Text = timeLeft + " minuten en " + displaySeconds + " seconden";
-                }
-                else
-                {
-                    timeLeftInSeconds -= 1;
-                    displaySeconds -= 1;
-                    lbl_TimeLeft.Text = timeLeft + " minuten en " + displaySeconds + " seconden";
-                }
-            }
-            else
-            {
-                // If the user ran out of time, stop the timer, show
-                // a MessageBox, and fill in the answers.
-                timerTimeLeft.Stop();
-                lbl_TimeLeft.Text = "Time's up!";
-                MessageBox.Show("You didn't finish in time.", "Sorry!");
-            }
-        }
-
         public void SetFaseText(String text)
         {
             if (this.lbl_currentFase.InvokeRequired)
@@ -134,16 +105,6 @@ namespace Remote_Healtcare_Console.Forms
         private void btn_startTest_Click(object sender, EventArgs e)
         {
             startTest = true;
-        }
-
-        public void setMinutesLeft(int minutes)
-        {
-            timeLeft = minutes;
-        }
-
-        public void startMinutesLeftTimer()
-        {
-            timerTimeLeft.Start();
         }
 
         public void resistanceUp()
@@ -205,6 +166,18 @@ namespace Remote_Healtcare_Console.Forms
             else
             {
                 this.lbl_RPMActual.Text = rpm.ToString();
+            }
+        }
+
+        public void setTimer(string seconds)
+        {
+            if (lbl_TimeLeft.InvokeRequired)
+            {
+                lbl_TimeLeft.BeginInvoke((MethodInvoker)delegate () { lbl_TimeLeft.Text = seconds; });
+            }
+            else
+            {
+                lbl_TimeLeft.Text = seconds;
             }
         }
     }

@@ -27,10 +27,6 @@ namespace Remote_Healtcare_Console
         private bool startTest = false;
         private bool AstrandWFAisNotActive = false;
         Astrand FormAstrand;
-        private bool opwarmFaseBegin;
-        private bool testFasebegin;
-        private bool testFaseUitbreidingBegin = true;
-        private bool coolingDownFaseBegin;
         private int timeTestDone = 6;
         private bool startStandby;
 
@@ -99,15 +95,9 @@ namespace Remote_Healtcare_Console
             if (Busy)
             {
                 BikeData latestData = RecordedData.Last();
+                FormAstrand.setTimer(latestData.Time.ToString());
                 if (latestData.Time.Minutes < 2)
                 {
-                    //setting remaining time in GUI
-                    if (!opwarmFaseBegin)
-                    {
-                        opwarmFaseBegin = true;
-                        FormAstrand.setMinutesLeft(2);
-                        FormAstrand.startMinutesLeftTimer();
-                    }
 
                     FormAstrand.SetFaseText("Opwarming");
 
@@ -134,30 +124,17 @@ namespace Remote_Healtcare_Console
                         int minutes = latestData.Time.Minutes;
                         if (minutes < 4)
                         {
-                            //setting remaining time in GUI
-                            if (testFasebegin)
-                            {
-                                testFasebegin = true;
-                                FormAstrand.setMinutesLeft(4);
-                                FormAstrand.startMinutesLeftTimer();
-                            }
 
                             int seconds = latestData.Time.Seconds;
                             if (seconds % 10 == 0 && latestData.Pulse < 140 && Resistance < 180)
                             {
                                 SetResistance(Resistance += 15);
                             }
-
-                            else
-                                testFaseUitbreidingBegin = false;
                         }
                         RpmCheck(latestData.Rpm);
 
                     }
-                    else
-                    {
-                        opwarmFaseBegin = true;
-                    }
+                    
                 }
                 else
                 {
@@ -207,8 +184,7 @@ namespace Remote_Healtcare_Console
         private void Run() {
             while (serialCommunicator.IsConnected() && start) {
                 Update();
-                //SetResistance((int)console.connectForm.connector.CalculateIncline("bike"));
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
             }
         }
 
@@ -281,8 +257,7 @@ namespace Remote_Healtcare_Console
             }
 
             
-                AstradAvans();
-            
+            AstradAvans();
             
             client.SendMessage(new
             {
