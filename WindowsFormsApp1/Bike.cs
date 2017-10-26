@@ -106,6 +106,7 @@ namespace Remote_Healtcare_Console
                     {
                         opwarmFaseBegin = true;
                         FormAstrand.setMinutesLeft(2);
+                        FormAstrand.startMinutesLeftTimer();
                     }
 
                     FormAstrand.SetFaseText("Opwarming");
@@ -138,10 +139,11 @@ namespace Remote_Healtcare_Console
                             {
                                 testFasebegin = true;
                                 FormAstrand.setMinutesLeft(4);
+                                FormAstrand.startMinutesLeftTimer();
                             }
 
                             int seconds = latestData.Time.Seconds;
-                            if (seconds % 10 == 0 && latestData.Pulse < 130 && Resistance < 180)
+                            if (seconds % 10 == 0 && latestData.Pulse < 140 && Resistance < 180)
                             {
                                 SetResistance(Resistance += 15);
                             }
@@ -150,21 +152,21 @@ namespace Remote_Healtcare_Console
                                 testFaseUitbreidingBegin = false;
                         }
                         RpmCheck(latestData.Rpm);
+
                     }
                     else
                     {
-
+                        opwarmFaseBegin = true;
                     }
-
-                    if (Busy)
-                    {
-                        FormAstrand.SetFaseText("Cooling down");
-                        AverageHeartBeatRate();
-                        CalculateVO2MAX();
-                        SetResistance(25);
-                        // cool down
-                        Busy = false;
-                    }
+                }
+                else
+                {
+                    FormAstrand.SetFaseText("Cooling down");
+                    AverageHeartBeatRate();
+                    CalculateVO2MAX();
+                    SetResistance(25);
+                    // cool down
+                    Busy = false;
                 }
             }
         }
