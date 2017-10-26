@@ -33,6 +33,7 @@ namespace Remote_Healtcare_Console
         private bool coolingDownFaseBegin;
         private int timeTestDone = 6;
         private bool startStandby;
+        private bool pauze;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -143,10 +144,13 @@ namespace Remote_Healtcare_Console
                             }
 
                             int seconds = latestData.Time.Seconds;
-                            if (seconds % 10 == 0 && latestData.Pulse < 140 && Resistance < 180)
+                            if (seconds % 10 == 0 && latestData.Pulse < 140 && Resistance < 180 && pauze)
                             {
+                                pauze = false;
                                 SetResistance(Resistance += 15);
                             }
+                            if (seconds % 10 == 1)
+                                pauze = true;
 
                             else
                                 testFaseUitbreidingBegin = false;
@@ -208,7 +212,7 @@ namespace Remote_Healtcare_Console
             while (serialCommunicator.IsConnected() && start) {
                 Update();
                 //SetResistance((int)console.connectForm.connector.CalculateIncline("bike"));
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
             }
         }
 
