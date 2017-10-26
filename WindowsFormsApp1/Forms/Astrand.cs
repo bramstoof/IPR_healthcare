@@ -88,17 +88,75 @@ namespace Remote_Healtcare_Console.Forms
             pic_CheckMark.Location = posCheckMark;
             pic_CheckMark.BackColor = Color.Transparent;
 
+            //making lbl_speedDesc transparent
+            var posSpeedDesc = this.PointToScreen(lbl_speedDesc.Location);
+            posSpeedDesc = pictureBox1.PointToClient(posSpeedDesc);
+            lbl_speedDesc.Parent = pictureBox1;
+            lbl_speedDesc.Location = posSpeedDesc;
+            lbl_speedDesc.BackColor = Color.Transparent;
 
-        }
+            //making lbl_speed transparent
+            var posSpeed = this.PointToScreen(lbl_speed.Location);
+            posSpeed = pictureBox1.PointToClient(posSpeed);
+            lbl_speed.Parent = pictureBox1;
+            lbl_speed.Location = posSpeed;
+            lbl_speed.BackColor = Color.Transparent;
 
-        private void makeThingTransparant(Control control)
-        {
-            string posVar = "pos"+control.ToString();
-            var pos = this.PointToScreen(pic_CheckMark.Location);
-            posCheckMark = pictureBox1.PointToClient(posCheckMark);
-            pic_CheckMark.Parent = pictureBox1;
-            pic_CheckMark.Location = posCheckMark;
-            pic_CheckMark.BackColor = Color.Transparent;
+            //making lbl_energieDesc transparent
+            var posEnergyDesc = this.PointToScreen(lbl_energieDesc.Location);
+            posEnergyDesc = pictureBox1.PointToClient(posEnergyDesc);
+            lbl_energieDesc.Parent = pictureBox1;
+            lbl_energieDesc.Location = posEnergyDesc;
+            lbl_energieDesc.BackColor = Color.Transparent;
+
+            //making lbl_energie transparent
+            var posEnergy = this.PointToScreen(lbl_energie.Location);
+            posEnergy = pictureBox1.PointToClient(posEnergy);
+            lbl_energie.Parent = pictureBox1;
+            lbl_energie.Location = posEnergy;
+            lbl_energie.BackColor = Color.Transparent;
+
+            //making lbl_WattDesc transparent
+            var posWattDesc = this.PointToScreen(lbl_WattDesc.Location);
+            posWattDesc = pictureBox1.PointToClient(posWattDesc);
+            lbl_WattDesc.Parent = pictureBox1;
+            lbl_WattDesc.Location = posWattDesc;
+            lbl_WattDesc.BackColor = Color.Transparent;
+
+            //making lbl_Watt transparent
+            var posWatt = this.PointToScreen(lbl_Watt.Location);
+            posWatt = pictureBox1.PointToClient(posWatt);
+            lbl_Watt.Parent = pictureBox1;
+            lbl_Watt.Location = posWatt;
+            lbl_Watt.BackColor = Color.Transparent;
+
+            //making lbl_weerstandDesc transparent
+            var posWeerstandDesc = this.PointToScreen(lbl_weerstandDesc.Location);
+            posWeerstandDesc = pictureBox1.PointToClient(posWeerstandDesc);
+            lbl_weerstandDesc.Parent = pictureBox1;
+            lbl_weerstandDesc.Location = posWeerstandDesc;
+            lbl_weerstandDesc.BackColor = Color.Transparent;
+
+            //making lbl_weerstand transparent
+            var posWeerstand = this.PointToScreen(lbl_weerstand.Location);
+            posWeerstand = pictureBox1.PointToClient(posWeerstand);
+            lbl_weerstand.Parent = pictureBox1;
+            lbl_weerstand.Location = posWeerstand;
+            lbl_weerstand.BackColor = Color.Transparent;
+
+            //making lbl_BPMDesc transparent
+            var posBPMDesc = this.PointToScreen(lbl_BPMDesc.Location);
+            posBPMDesc = pictureBox1.PointToClient(posBPMDesc);
+            lbl_BPMDesc.Parent = pictureBox1;
+            lbl_BPMDesc.Location = posBPMDesc;
+            lbl_BPMDesc.BackColor = Color.Transparent;
+
+            //making lbl_BPMDesc transparent
+            var posBPM = this.PointToScreen(lbl_BPM.Location);
+            posBPM = pictureBox1.PointToClient(posBPM);
+            lbl_BPM.Parent = pictureBox1;
+            lbl_BPM.Location = posBPM;
+            lbl_BPM.BackColor = Color.Transparent;
         }
 
         public void SetFaseText(String text)

@@ -66,9 +66,7 @@ namespace Remote_Healtcare_Console
             }
             else
             {
-
                 //new Thread(() => test()).Start();
-
                 bike = new Bike(combo.SelectedItem.ToString(), new User( "bram", "bram", "bram", true, "1997-9-25"),this, ref client);
                 bike.Start();
             }
