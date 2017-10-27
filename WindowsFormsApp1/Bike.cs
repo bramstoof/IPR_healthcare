@@ -21,7 +21,7 @@ namespace Remote_Healtcare_Console
         private List<int> heartrates;
         private User user;
         private double factor;
-        private int hartfrequentie;
+        private int hartfrequentie =210;
         private int Resistance = 25;
         private bool Busy = true;
         private bool startTest = false;
@@ -32,11 +32,9 @@ namespace Remote_Healtcare_Console
         private bool pauze;
         private bool testReady;
         BikeData latestData;
-<<<<<<< HEAD
         private int waitTime;
-=======
         private int pulse { get;  set; }
->>>>>>> Thijs
+        private bool pauzeHeart;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -49,6 +47,7 @@ namespace Remote_Healtcare_Console
             FormAstrand = new Astrand();
             FormAstrand.Closed += (s, args) => FormAstrand.Close();
             FormAstrand.Show();
+            heartrates = new List<int>();
         }
 
         private void changes()
@@ -104,7 +103,7 @@ namespace Remote_Healtcare_Console
             {
                 //BikeData latestData = RecordedData.Last();
                 //int Pulse = latestData.Pulse;
-                int Pulse = 120; // aanpassen via GUI !!!!!!!
+                int Pulse = FormAstrand.pulse; // aanpassen via GUI !!!!!!!
                 int minutes = latestData.Time.Minutes;
                 int seconds = latestData.Time.Seconds;
                 if (Pulse > hartfrequentie)
@@ -137,17 +136,26 @@ namespace Remote_Healtcare_Console
                             SetResistance(Resistance += 25);
                     }
 
-                    if (seconds % 10 == 1)
-                        pauze = false;
+                    if (seconds % 59 == 0 && !pauzeHeart && seconds != 0)
+                    {
+                        pauzeHeart = true;
+                        heartrates.Add(pulse);
+                    }
 
-                    if (seconds % 59 == 0)
-                        heartrates.Add(latestData.Pulse);
                     RpmCheck(latestData.Rpm);
+
+                    if (seconds % 10 == 1)
+                    {
+                        pauze = false;
+                        pauze = false;
+                    }
+
                 }
                 else if (minutes < 6)
                 {
+                    FormAstrand.SetFaseText("Test");
                     if (seconds % 15 == 0)
-                        heartrates.Add(latestData.Pulse);
+                        heartrates.Add(pulse);
 
                     if (Pulse < 130 && !pauze)
                     {
@@ -320,7 +328,7 @@ namespace Remote_Healtcare_Console
             latestData = RecordedData.Last();
             FormAstrand.setAll(latestData.Time.ToString(), latestData.Speed, latestData.Resistance, latestData.Energy, latestData.Power, latestData.Pulse, latestData.Rpm);
             RpmCheck(latestData.Rpm);
-
+            SetDataToGUI();
             AstradAvans();
             
             client.SendMessage(new
@@ -331,8 +339,7 @@ namespace Remote_Healtcare_Console
                     bikeData = bikeData
                 }
             });
-
-            SetDataToGUI();
+            
         }
 
         public int AverageHeartBeatRate()

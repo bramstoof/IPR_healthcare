@@ -17,7 +17,7 @@ namespace Remote_Healtcare_Console.Forms
         int displaySeconds = 60;
         private Boolean testTimerRunning;
         public bool startTest{ get; set; }
-        private int pulse { get; set; }
+        public int pulse { get; set; }
 
         public Astrand()
         {
@@ -25,6 +25,7 @@ namespace Remote_Healtcare_Console.Forms
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            pulse = 0;
             
             //making lbl_faseDesc transparent
             var poslblFase = this.PointToScreen(lbl_faseDesc.Location);
