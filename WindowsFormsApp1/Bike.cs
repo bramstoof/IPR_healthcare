@@ -32,6 +32,7 @@ namespace Remote_Healtcare_Console
         private bool pauze;
         private bool testReady;
         BikeData latestData;
+        private int waitTime;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -100,67 +101,108 @@ namespace Remote_Healtcare_Console
                 //BikeData latestData = RecordedData.Last();
                 //int Pulse = latestData.Pulse;
                 int Pulse = 120; // aanpassen via GUI !!!!!!!
+                int minutes = latestData.Time.Minutes;
+                int seconds = latestData.Time.Seconds;
                 if (Pulse > hartfrequentie)
+                {
                     Busy = false;
-                if (latestData.Time.Minutes < 2)
+                    FormAstrand.SetFaseText("hartslag te hoog");
+                }
+                if (minutes < 2)
                 {
 
                     FormAstrand.SetFaseText("Opwarming");
 
-                    if (Resistance == 60)
+                    if (Resistance == 50)
                         RpmCheck(latestData.Rpm);
                     else
                     {
-                        Resistance = 60;
+                        Resistance = 50;
                         SetResistance(Resistance);
                     }
                 }
-                else if (latestData.Time.Minutes < timeTestDone)
+                else if (minutes < 4)
                 {
-                    int PulseCheck;
-                    int minutes = latestData.Time.Minutes;
-                    int seconds = latestData.Time.Seconds;
-                    if (testReady)
+                    FormAstrand.SetFaseText("BeginTest");
+                    if (seconds % 10 == 0 && Pulse < 140 && Resistance < 180 && !pauze)
                     {
-                        PulseCheck = 59;
-                        FormAstrand.SetFaseText("BeginTest");
-                        if (seconds % 10 == 0 && Pulse < 140 && Resistance < 180 && pauze)
-                        {
-                            pauze = false;
-                            SetResistance(Resistance += 15);
-                        }
-                        if (seconds % 10 == 1)
-                            pauze = true;
-                        if (Pulse < 140)
-                            testReady = true;
+                        pauze = true;
+                        if (user.Man)
+                            SetResistance(Resistance += 50);
+                        else
+                            SetResistance(Resistance += 25);
                     }
-                    else {
-                        PulseCheck = 15;
-                    if (Pulse < 130)
-                        {
-                        PulseCheck = 0;
-                        timeTestDone += 2;
-                        }
-                    }
-                       
-                    RpmCheck(latestData.Rpm);
-                    if (seconds % PulseCheck == 0)
-                    {
+
+                    if (seconds % 10 == 1)
+                        pauze = false;
+
+                    if (seconds % 59 == 0)
                         heartrates.Add(latestData.Pulse);
+                    RpmCheck(latestData.Rpm);
+                }
+                else if (minutes < 6)
+                {
+                    if (seconds % 15 == 0)
+                        heartrates.Add(latestData.Pulse);
+
+                    if (Pulse < 130 && !pauze)
+                    {
+                        pauze = true;
+                        waitTime = seconds;
+
+                        if (user.Man)
+                            SetResistance(Resistance += 25);
+                        else
+                            SetResistance(Resistance += 15);
+                        timeTestDone += 2;
                     }
-                    
-                    
+                    if (pauze)
+                        if (waitTime != seconds)
+                            pauze = false;
+
+                    RpmCheck(latestData.Rpm);
                 }
                 else
                 {
-                    FormAstrand.SetFaseText("Cooling down");
-                    AverageHeartBeatRate();
-                    CalculateVO2MAX();
-                    SetResistance(25);
-                    // cool down
+                    if (CheckStadyState())
+                    {
+                        FormAstrand.SetFaseText("Cooling down");
+                        AverageHeartBeatRate();
+                        CalculateVO2MAX();
+                        SetResistance(25);
+                        Busy = false;
+                    }
+                    else
+                    {
+                        FormAstrand.SetFaseText("geen stady state berijkt");
+                        Busy = false;
+                    }
+                }
+                if (Pulse > hartfrequentie)
+                {
                     Busy = false;
+                    FormAstrand.SetFaseText("hartslag te hoog");
                 }
             }
+        }
+
+        private bool CheckStadyState()
+        {
+            List<int> lastHeartreate = new List<int>();
+
+            int size = heartrates.Count();
+            if (size >= 6)
+            {
+                for (int x = size - 1; x < size - 5; x++)
+                {
+                    lastHeartreate.Add(heartrates[x]);
+                }
+                int Max = lastHeartreate.Max();
+                int Min = lastHeartreate.Min();
+                if (Max - Min <= 5)
+                    return true;
+            }
+            return false;
         }
 
         private void RpmCheck(int rpm) {
