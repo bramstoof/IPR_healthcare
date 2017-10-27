@@ -13,12 +13,14 @@ using UserData;
 
 namespace Remote_Healtcare_Console
 {
-    class BikeSimulator : Kettler {
+    class BikeSimulator : Kettler 
+    {
 
         private Thread BikeThread;
         private ISet<BikeData> data;
         private int count;
         private Astrand FormAstrand;
+        BikeData latestData;
 
         public BikeSimulator(Console console) : base(console) {
             this.console = console;
@@ -42,44 +44,63 @@ namespace Remote_Healtcare_Console
             throw new NotImplementedException();
         }
 
-        public override void Update() {
-            while (count != data.Count) {
-                try {
-                    console.Invoke((MethodInvoker)delegate {
-                        // Running on the UI thread
-                        //console.SetPulse(data.ElementAt(count).Pulse.ToString());
-                        //console.SetRoundMin(data.ElementAt(count).Rpm.ToString());
-                        //console.SetDistance((data.ElementAt(count).Distance * 100).ToString());
-                        //console.SetResistance(data.ElementAt(count).Resistance.ToString());
-                        //console.SetEnergy(data.ElementAt(count).Energy.ToString());
-                        //console.SetTime(((data.ElementAt(count).Time < TimeSpan.Zero) ? "-" : "") + data.ElementAt(count).Time.ToString(@"mm\:ss"));
-                        //console.SetWatt(data.ElementAt(count).Power.ToString());
-                    });
-                }
-                catch (System.InvalidOperationException e) {
-                    System.Console.WriteLine(e.StackTrace);
-                }
-                catch (System.ComponentModel.InvalidAsynchronousStateException e) {
-                    System.Console.WriteLine(e.StackTrace);
-                }
+        public override void Update()
+        {
+            while (count != data.Count)
+            {
+                // Running on the UI thread
+                FormAstrand.setAll(
+                    ((data.ElementAt(count).Time < TimeSpan.Zero) ? "-" : "") + data.ElementAt(count).Time.ToString(@"mm\:ss"),
+                    (data.ElementAt(count).Speed),
+                    (data.ElementAt(count).Resistance),
+                    (data.ElementAt(count).Energy),
+                    (data.ElementAt(count).Power),
+                    (data.ElementAt(count).Pulse),
+                    (data.ElementAt(count).Rpm));
+
+                RpmCheck(data.ElementAt(count).Rpm);
+                
                 count++;
                 System.Threading.Thread.Sleep(1000);
             }
         }
 
-        public override void SetDistance(int distance) {
+        private void RpmCheck(int rpm)
+        {
+            if (rpm <= 50)
+            {
+                //go faster
+                FormAstrand.resistanceUp();
+            }
+            else if (rpm >= 60)
+            {
+                //go slower
+                FormAstrand.resistanceDown();
+            }
+            else
+            {
+                //ga zo door
+                FormAstrand.resistenceGood();
+            }
+        }
+
+        public override void SetDistance(int distance)
+        {
             throw new NotImplementedException();
         }
 
-        public override void Start() {
+        public override void Start()
+        {
             BikeThread.Start();
         }
 
-        public override void Stop() {
+        public override void Stop()
+        {
             BikeThread.Abort();
         }
 
-        public override void SetManual() {
+        public override void SetManual()
+        {
             throw new NotImplementedException();
         }
     }

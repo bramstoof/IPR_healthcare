@@ -17,14 +17,15 @@ namespace Remote_Healtcare_Console.Forms
         int displaySeconds = 60;
         private Boolean testTimerRunning;
         public bool startTest{ get; set; }
+        private int pulse { get; set; }
 
         public Astrand()
         {
             startTest = false;
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             
-
             //making lbl_faseDesc transparent
             var poslblFase = this.PointToScreen(lbl_faseDesc.Location);
             poslblFase = pictureBox1.PointToClient(poslblFase);
@@ -151,7 +152,7 @@ namespace Remote_Healtcare_Console.Forms
             lbl_BPMDesc.Location = posBPMDesc;
             lbl_BPMDesc.BackColor = Color.Transparent;
 
-            //making lbl_BPMDesc transparent
+            //making lbl_BPM transparent
             var posBPM = this.PointToScreen(lbl_BPM.Location);
             posBPM = pictureBox1.PointToClient(posBPM);
             lbl_BPM.Parent = pictureBox1;
@@ -223,7 +224,6 @@ namespace Remote_Healtcare_Console.Forms
                 pic_ArrowDown.Hide();
                 pic_CheckMark.Show();
             }
-            
         }
 
         public void setAll(string tijd, double snelheid, int weerstand, int energie, int watt, int BPM, int RPM)
@@ -250,6 +250,16 @@ namespace Remote_Healtcare_Console.Forms
                 lbl_BPM.Text = BPM.ToString(); ;
                 lbl_RPMActual.Text = RPM.ToString(); ;
             }
+        }
+
+        private void btn_sentBPM_Click(object sender, EventArgs e)
+        {
+            lbl_BPM.Text = txtBx_pulse.Text;
+            int j;
+            if (Int32.TryParse(txtBx_pulse.Text, out j))
+                pulse = j;
+            else
+                MessageBox.Show("Geen geldige waarde", "Er ging iets fout", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
