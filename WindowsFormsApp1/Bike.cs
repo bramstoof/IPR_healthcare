@@ -139,14 +139,14 @@ namespace Remote_Healtcare_Console
                     if (seconds % 59 == 0 && !pauzeHeart && seconds != 0)
                     {
                         pauzeHeart = true;
-                        heartrates.Add(pulse);
+                        heartrates.Add(Pulse);
                     }
 
                     RpmCheck(latestData.Rpm);
 
                     if (seconds % 10 == 1)
                     {
-                        pauze = false;
+                        pauzeHeart = false;
                         pauze = false;
                     }
 
@@ -154,10 +154,15 @@ namespace Remote_Healtcare_Console
                 else if (minutes < 6)
                 {
                     FormAstrand.SetFaseText("Test");
-                    if (seconds % 15 == 0)
-                        heartrates.Add(pulse);
+                    if (seconds % 15 == 0 && !pauzeHeart)
+                    { 
+                        pauzeHeart = true;
+                        heartrates.Add(Pulse);
+                    }
+                    if (seconds % 10 == 1)
+                        pauzeHeart = false;
 
-                    if (Pulse < 130 && !pauze)
+                        if (Pulse < 130 && !pauze)
                     {
                         pauze = true;
                         waitTime = seconds;
@@ -168,8 +173,7 @@ namespace Remote_Healtcare_Console
                             SetResistance(Resistance += 15);
                         timeTestDone += 2;
                     }
-                    if (pauze)
-                        if (waitTime != seconds)
+                    if (pauze && waitTime + 10 == seconds)
                             pauze = false;
 
                     RpmCheck(latestData.Rpm);
