@@ -32,6 +32,7 @@ namespace Remote_Healtcare_Console
         private bool pauze;
         private bool testReady;
         BikeData latestData;
+        private int pulse { get;  set; }
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -179,8 +180,8 @@ namespace Remote_Healtcare_Console
                 //ga zo door
                 FormAstrand.resistenceGood();
             }
-
         }
+
         public override void Stop() {
             start = false;
             serialCommunicator.CloseConnection();

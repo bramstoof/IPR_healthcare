@@ -35,9 +35,9 @@
             this.comPorts = new System.Windows.Forms.ComboBox();
             this.Chat_Box = new System.Windows.Forms.TextBox();
             this.dateTimePickerLeeftijd = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxGeslacht = new System.Windows.Forms.ComboBox();
             this.lbl_gewicht = new System.Windows.Forms.Label();
             this.maskedTextBox_gewicht = new System.Windows.Forms.MaskedTextBox();
+            this.checkedListBox_geslacht = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // BStart
@@ -117,21 +117,11 @@
             this.dateTimePickerLeeftijd.TabIndex = 28;
             this.dateTimePickerLeeftijd.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
-            // comboBoxGeslacht
-            // 
-            this.comboBoxGeslacht.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxGeslacht.FormattingEnabled = true;
-            this.comboBoxGeslacht.Location = new System.Drawing.Point(97, 117);
-            this.comboBoxGeslacht.Name = "comboBoxGeslacht";
-            this.comboBoxGeslacht.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxGeslacht.TabIndex = 29;
-            this.comboBoxGeslacht.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // lbl_gewicht
             // 
             this.lbl_gewicht.AutoSize = true;
             this.lbl_gewicht.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_gewicht.Location = new System.Drawing.Point(13, 160);
+            this.lbl_gewicht.Location = new System.Drawing.Point(13, 177);
             this.lbl_gewicht.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_gewicht.Name = "lbl_gewicht";
             this.lbl_gewicht.Size = new System.Drawing.Size(70, 17);
@@ -141,11 +131,22 @@
             // maskedTextBox_gewicht
             // 
             this.maskedTextBox_gewicht.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
-            this.maskedTextBox_gewicht.Location = new System.Drawing.Point(97, 155);
-            this.maskedTextBox_gewicht.Mask = "000";
+            this.maskedTextBox_gewicht.Location = new System.Drawing.Point(87, 172);
+            this.maskedTextBox_gewicht.Mask = "000kg";
             this.maskedTextBox_gewicht.Name = "maskedTextBox_gewicht";
             this.maskedTextBox_gewicht.Size = new System.Drawing.Size(100, 22);
             this.maskedTextBox_gewicht.TabIndex = 31;
+            // 
+            // checkedListBox_geslacht
+            // 
+            this.checkedListBox_geslacht.FormattingEnabled = true;
+            this.checkedListBox_geslacht.Items.AddRange(new object[] {
+            "man",
+            "vrouw"});
+            this.checkedListBox_geslacht.Location = new System.Drawing.Point(87, 124);
+            this.checkedListBox_geslacht.Name = "checkedListBox_geslacht";
+            this.checkedListBox_geslacht.Size = new System.Drawing.Size(73, 38);
+            this.checkedListBox_geslacht.TabIndex = 32;
             // 
             // Console
             // 
@@ -153,9 +154,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(692, 396);
+            this.Controls.Add(this.checkedListBox_geslacht);
             this.Controls.Add(this.maskedTextBox_gewicht);
             this.Controls.Add(this.lbl_gewicht);
-            this.Controls.Add(this.comboBoxGeslacht);
             this.Controls.Add(this.dateTimePickerLeeftijd);
             this.Controls.Add(this.Chat_Box);
             this.Controls.Add(this.comPorts);
@@ -182,9 +183,9 @@
         private System.Windows.Forms.ComboBox comPorts;
         private System.Windows.Forms.TextBox Chat_Box;
         private System.Windows.Forms.DateTimePicker dateTimePickerLeeftijd;
-        private System.Windows.Forms.ComboBox comboBoxGeslacht;
         private System.Windows.Forms.Label lbl_gewicht;
         private System.Windows.Forms.MaskedTextBox maskedTextBox_gewicht;
+        private System.Windows.Forms.CheckedListBox checkedListBox_geslacht;
     }
 }
 

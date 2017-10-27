@@ -29,55 +29,64 @@ namespace Remote_Healtcare_Console
             combo.Items.Clear();
             combo.Items.Add("Simulator");
             combo.Items.AddRange(SerialPort.GetPortNames());
-
-            comboBoxGeslacht.Items.Add("Man");
-            comboBoxGeslacht.Items.Add("Vrouw");
-            comboBoxGeslacht.Items.Add("Overig");
         }
 
         private void BStart_Click(object sender, EventArgs e)
         {
-            combo.Focus();
-            if (combo.SelectedItem == null)
+            maskedTextBox_gewicht.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            if (checkedListBox_geslacht.CheckedItems.Count == 1)
             {
-                string message = "Kies een simulator of COM poort";
-                string caption = "Error Detected in Input";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBox.Show(message, caption, buttons, icon);
-            }
-            else if (combo.SelectedItem.Equals("Simulator")){
-
-                OpenFileDialog browseFileDialog = new OpenFileDialog();
-                browseFileDialog.Filter = "JSON (.json)|*.json;";
-                browseFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-
-                if (browseFileDialog.ShowDialog() == DialogResult.OK)
+                combo.Focus();
+                if (combo.SelectedItem == null)
                 {
-                    path = Path.GetFullPath(browseFileDialog.FileName);
-                    string json = File.ReadAllText(path);
-                    JArray openedData = (JArray)JsonConvert.DeserializeObject(json);
-
-                    data = (ISet<BikeData>)openedData.ToObject(typeof(ISet<BikeData>));
+                    string message = "Kies een simulator of COM poort";
+                    string caption = "Error Detected in Input";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBox.Show(message, caption, buttons, icon);
                 }
+                else if (combo.SelectedItem.Equals("Simulator"))
+                {
 
-                bike = new BikeSimulator(this);
-                bike.Start();
+                    OpenFileDialog browseFileDialog = new OpenFileDialog();
+                    browseFileDialog.Filter = "JSON (.json)|*.json;";
+                    browseFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+
+                    if (browseFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        path = Path.GetFullPath(browseFileDialog.FileName);
+                        string json = File.ReadAllText(path);
+                        JArray openedData = (JArray)JsonConvert.DeserializeObject(json);
+
+                        data = (ISet<BikeData>)openedData.ToObject(typeof(ISet<BikeData>));
+                    }
+
+                    bike = new BikeSimulator(this);
+                    bike.Start();
+                    Hide();
+                }
+                else
+                {
+                    //new Thread(() => test()).Start();
+                    bike = new Bike(combo.SelectedItem.ToString(), new User("bram", "bram", "bram", true, "1997-9-25"), this, ref client);
+                    bike.Start();
+                    Hide();
+                }
+                
+            }
+            else if (checkedListBox_geslacht.CheckedItems.Count != 1)
+            {
+
+                MessageBox.Show("Kies 1 geslacht", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
-            {
-                //new Thread(() => test()).Start();
-                bike = new Bike(combo.SelectedItem.ToString(), new User( "bram", "bram", "bram", true, "1997-9-25"),this, ref client);
-                bike.Start();
-            }
-            this.Hide();
+                MessageBox.Show("Kies uw leeftijd, Geslacht en gewicht.", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
         
         protected override void OnFormClosed(FormClosedEventArgs e) {
             Environment.Exit(0);
             base.OnFormClosed(e);
         }
-
 
         public void AddMessage(String value)
         {
@@ -97,6 +106,12 @@ namespace Remote_Healtcare_Console
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            for (int ix = 0; ix < checkedListBox_geslacht.Items.Count; ++ix)
+                if (ix != e.Index) checkedListBox_geslacht.SetItemChecked(ix, false);
         }
     }
 }

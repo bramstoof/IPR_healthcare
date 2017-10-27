@@ -51,6 +51,7 @@
             this.lbl_energie = new System.Windows.Forms.Label();
             this.lbl_Watt = new System.Windows.Forms.Label();
             this.lbl_BPM = new System.Windows.Forms.Label();
+            this.btn_sentBPM = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pic_CheckMark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_ArrowDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_ArrowUp)).BeginInit();
@@ -284,11 +285,22 @@
             this.lbl_BPM.TabIndex = 20;
             this.lbl_BPM.Text = "[666 BPM]";
             // 
+            // btn_sentBPM
+            // 
+            this.btn_sentBPM.Location = new System.Drawing.Point(198, 455);
+            this.btn_sentBPM.Name = "btn_sentBPM";
+            this.btn_sentBPM.Size = new System.Drawing.Size(75, 23);
+            this.btn_sentBPM.TabIndex = 21;
+            this.btn_sentBPM.Text = "Verstuur!";
+            this.btn_sentBPM.UseVisualStyleBackColor = true;
+            this.btn_sentBPM.Click += new System.EventHandler(this.btn_sentBPM_Click);
+            // 
             // Astrand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 552);
+            this.Controls.Add(this.btn_sentBPM);
             this.Controls.Add(this.lbl_BPM);
             this.Controls.Add(this.lbl_Watt);
             this.Controls.Add(this.lbl_energie);
@@ -345,5 +357,6 @@
         private System.Windows.Forms.Label lbl_energie;
         private System.Windows.Forms.Label lbl_Watt;
         private System.Windows.Forms.Label lbl_BPM;
+        private System.Windows.Forms.Button btn_sentBPM;
     }
 }
