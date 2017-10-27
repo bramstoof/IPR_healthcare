@@ -73,7 +73,7 @@
             this.lbl_currentFase.AutoSize = true;
             this.lbl_currentFase.BackColor = System.Drawing.Color.Transparent;
             this.lbl_currentFase.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_currentFase.Location = new System.Drawing.Point(186, 41);
+            this.lbl_currentFase.Location = new System.Drawing.Point(190, 41);
             this.lbl_currentFase.Name = "lbl_currentFase";
             this.lbl_currentFase.Size = new System.Drawing.Size(115, 48);
             this.lbl_currentFase.TabIndex = 2;
@@ -95,7 +95,7 @@
             this.lbl_TimeLeft.AutoSize = true;
             this.lbl_TimeLeft.BackColor = System.Drawing.Color.Transparent;
             this.lbl_TimeLeft.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_TimeLeft.Location = new System.Drawing.Point(171, 103);
+            this.lbl_TimeLeft.Location = new System.Drawing.Point(176, 103);
             this.lbl_TimeLeft.Name = "lbl_TimeLeft";
             this.lbl_TimeLeft.Size = new System.Drawing.Size(184, 48);
             this.lbl_TimeLeft.TabIndex = 4;
@@ -234,7 +234,7 @@
             this.lbl_speed.AutoSize = true;
             this.lbl_speed.BackColor = System.Drawing.Color.Transparent;
             this.lbl_speed.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_speed.Location = new System.Drawing.Point(258, 164);
+            this.lbl_speed.Location = new System.Drawing.Point(262, 164);
             this.lbl_speed.Name = "lbl_speed";
             this.lbl_speed.Size = new System.Drawing.Size(158, 48);
             this.lbl_speed.TabIndex = 16;
@@ -256,7 +256,7 @@
             this.lbl_energie.AutoSize = true;
             this.lbl_energie.BackColor = System.Drawing.Color.Transparent;
             this.lbl_energie.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_energie.Location = new System.Drawing.Point(237, 282);
+            this.lbl_energie.Location = new System.Drawing.Point(241, 282);
             this.lbl_energie.Name = "lbl_energie";
             this.lbl_energie.Size = new System.Drawing.Size(210, 48);
             this.lbl_energie.TabIndex = 18;
@@ -267,7 +267,7 @@
             this.lbl_Watt.AutoSize = true;
             this.lbl_Watt.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Watt.Font = new System.Drawing.Font("Impact", 24.20168F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Watt.Location = new System.Drawing.Point(186, 343);
+            this.lbl_Watt.Location = new System.Drawing.Point(199, 343);
             this.lbl_Watt.Name = "lbl_Watt";
             this.lbl_Watt.Size = new System.Drawing.Size(102, 48);
             this.lbl_Watt.TabIndex = 19;

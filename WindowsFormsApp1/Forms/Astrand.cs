@@ -159,6 +159,11 @@ namespace Remote_Healtcare_Console.Forms
             lbl_BPM.BackColor = Color.Transparent;
         }
 
+        private void btn_startTest_Click(object sender, EventArgs e)
+        {
+            startTest = true;
+        }
+        
         public void SetFaseText(String text)
         {
             if (this.lbl_currentFase.InvokeRequired)
@@ -169,11 +174,6 @@ namespace Remote_Healtcare_Console.Forms
             {
                 this.lbl_currentFase.Text = text; ;
             }
-        }
-
-        private void btn_startTest_Click(object sender, EventArgs e)
-        {
-            startTest = true;
         }
 
         public void resistanceUp()
@@ -226,27 +226,29 @@ namespace Remote_Healtcare_Console.Forms
             
         }
 
-        public void setRPM(int rpm)
+        public void setAll(string tijd, double snelheid, int weerstand, int energie, int watt, int BPM, int RPM)
         {
-            if (this.lbl_RPMActual.InvokeRequired)
+            if(lbl_currentFase.InvokeRequired || lbl_TimeLeft.InvokeRequired || lbl_speed.InvokeRequired || lbl_weerstand.InvokeRequired || lbl_energie.InvokeRequired || lbl_Watt.InvokeRequired || lbl_BPM.InvokeRequired || lbl_RPMActual.InvokeRequired)
             {
-                this.lbl_RPMActual.BeginInvoke((MethodInvoker)delegate () { this.lbl_RPMActual.Text = rpm.ToString();});
+                //lbl_currentFase.BeginInvoke((MethodInvoker)delegate () { lbl_currentFase.Text = fase; ; });
+                lbl_TimeLeft.BeginInvoke((MethodInvoker)delegate () { lbl_TimeLeft.Text = tijd; ; });
+                lbl_speed.BeginInvoke((MethodInvoker)delegate () { lbl_speed.Text = snelheid.ToString(); ; });
+                lbl_weerstand.BeginInvoke((MethodInvoker)delegate () { lbl_weerstand.Text = weerstand.ToString(); ; });
+                lbl_energie.BeginInvoke((MethodInvoker)delegate () { lbl_energie.Text = energie.ToString(); ; });
+                lbl_Watt.BeginInvoke((MethodInvoker)delegate () { lbl_Watt.Text = watt.ToString(); ; });
+                lbl_BPM.BeginInvoke((MethodInvoker)delegate () { lbl_BPM.Text = BPM.ToString(); ; });
+                lbl_RPMActual.BeginInvoke((MethodInvoker)delegate () { lbl_RPMActual.Text = RPM.ToString(); ; });
             }
             else
             {
-                this.lbl_RPMActual.Text = rpm.ToString();
-            }
-        }
-
-        public void setTimer(string seconds)
-        {
-            if (lbl_TimeLeft.InvokeRequired)
-            {
-                lbl_TimeLeft.BeginInvoke((MethodInvoker)delegate () { lbl_TimeLeft.Text = seconds; });
-            }
-            else
-            {
-                lbl_TimeLeft.Text = seconds;
+                //lbl_currentFase.Text = fase; ;
+                lbl_TimeLeft.Text = tijd; ;
+                lbl_speed.Text = snelheid.ToString(); ;
+                lbl_weerstand.Text = weerstand.ToString(); ;
+                lbl_energie.Text = energie.ToString(); ;
+                lbl_Watt.Text = watt.ToString(); ;
+                lbl_BPM.Text = BPM.ToString(); ;
+                lbl_RPMActual.Text = RPM.ToString(); ;
             }
         }
     }

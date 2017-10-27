@@ -31,6 +31,7 @@ namespace Remote_Healtcare_Console
         private bool startStandby;
         private bool pauze;
         private bool testReady;
+        BikeData latestData;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -96,13 +97,11 @@ namespace Remote_Healtcare_Console
         {
             if (Busy)
             {
-                BikeData latestData = RecordedData.Last();
+                //BikeData latestData = RecordedData.Last();
                 //int Pulse = latestData.Pulse;
                 int Pulse = 120; // aanpassen via GUI !!!!!!!
                 if (Pulse > hartfrequentie)
                     Busy = false;
-               
-                FormAstrand.setTimer(latestData.Time.ToString());
                 if (latestData.Time.Minutes < 2)
                 {
 
@@ -165,7 +164,6 @@ namespace Remote_Healtcare_Console
         }
 
         private void RpmCheck(int rpm) {
-            FormAstrand.setRPM(rpm);
             if (rpm <= 50)
             {
                 //go faster
@@ -273,7 +271,10 @@ namespace Remote_Healtcare_Console
                 RecordedData.Add(bikeData);
             }
 
-            
+            latestData = RecordedData.Last();
+            FormAstrand.setAll(latestData.Time.ToString(), latestData.Speed, latestData.Resistance, latestData.Energy, latestData.Power, latestData.Pulse, latestData.Rpm);
+            RpmCheck(latestData.Rpm);
+
             AstradAvans();
             
             client.SendMessage(new
