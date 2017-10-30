@@ -349,10 +349,8 @@ namespace Remote_Healtcare_Console
             return (int)heartrates.Average();
         }
 
-        private string rateVO2max(int Vo2Max)
+        private string RateVO2max(int Vo2Max)
         {
-            string rate = "";
-
             int leeftijd = user.getAge();
             if (user.Man)
             {
@@ -489,9 +487,6 @@ namespace Remote_Healtcare_Console
                         return "geweldig";
                 }
             }
-
-
-            return rate;
         }
         public void CalculateVO2MAX()
         {
