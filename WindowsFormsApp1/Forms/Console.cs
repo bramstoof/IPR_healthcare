@@ -19,6 +19,8 @@ namespace Remote_Healtcare_Console
         public ISet<BikeData> data;
         private Client client;
         int timeLeft;
+        bool isMannelijk;
+        DateTime geboorteDatum;
 
         public Console(Client client)
         {
@@ -34,8 +36,10 @@ namespace Remote_Healtcare_Console
         private void BStart_Click(object sender, EventArgs e)
         {
             maskedTextBox_gewicht.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            if (checkedListBox_geslacht.CheckedItems.Count == 1)
+            System.Console.WriteLine("text:"+maskedTextBox_gewicht.Text+"einde Text");
+            if (checkedListBox_geslacht.CheckedItems.Count == 1 && maskedTextBox_gewicht.Text != "")
             {
+                //System.Console.WriteLine(maskedTextBox_gewicht.Text);
                 combo.Focus();
                 if (combo.SelectedItem == null)
                 {
@@ -68,19 +72,28 @@ namespace Remote_Healtcare_Console
                 else
                 {
                     //new Thread(() => test()).Start();
-                    bike = new Bike(combo.SelectedItem.ToString(), new User("bram", "bram", "bram", true, "1997-9-25"), this, ref client);
+
+                    if (checkedListBox_geslacht.GetItemChecked(0) == true)
+                        isMannelijk = true;
+                    else
+                        isMannelijk = false;
+
+                    string theDate = dateTimePickerLeeftijd.Value.ToString("yyyy-MM-dd");
+
+                    int gewicht = Int32.Parse(maskedTextBox_gewicht.Text);
+
+                    bike = new Bike(combo.SelectedItem.ToString(), new User("bram", "bram", "bram", theDate, isMannelijk, gewicht), this, ref client);
                     bike.Start();
                     Hide();
                 }
                 
             }
             else if (checkedListBox_geslacht.CheckedItems.Count != 1)
-            {
-
-                MessageBox.Show("Kies 1 geslacht", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
+                MessageBox.Show("Kies 1 geslacht", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else if (maskedTextBox_gewicht.Text != "")
+                MessageBox.Show("Vul uw gewicht in", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
-                MessageBox.Show("Kies uw leeftijd, Geslacht en gewicht.", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Kies uw leeftijd, Geslacht en gewicht.", "Er ging iets mis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         
         protected override void OnFormClosed(FormClosedEventArgs e) {

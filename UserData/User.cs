@@ -15,32 +15,35 @@ namespace UserData
         public string FullName { get; set; }
         public DateTime BirthDay;
         public bool Man;
+        public int gewicht;
         public UserType Type { get; set; }
 
         [Newtonsoft.Json.JsonConstructor]
-        public User(string username, string password, string fullName, string hashcode, string BirthDay, bool man, UserType type)
+        public User(string username, string password, string fullName, string hashcode, string BirthDay, bool man, int gewicht, UserType type)
         {
             this.username = username;
             this.password = password;
             this.FullName = fullName;
             this.hashcode = hashcode;
             this.Man = man;
+            this.gewicht = gewicht;
             //this.BirthDay = DateTime.Parse(BirthDay);
             this.Type = type;
         }
 
-        public User(string username, string password, string fullName, bool man, string date)
+        public User(string username, string password, string fullName, string date, bool man, int gewicht)
         {
             this.username = username;
             this.password = password;
             this.FullName = fullName;
             this.BirthDay = DateTime.Parse(date);
             this.Man = man;
+            this.gewicht = gewicht;
             this.Type = UserType.Client;
             makeHashcodeValid(Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes(DateTime.UtcNow.Ticks.ToString() + username))));
         }
 
-        public User(string username, string password, string fullName, string date, bool man, UserType type)
+        public User(string username, string password, string fullName, string date, bool man, int gewicht, UserType type)
         {
             this.username = username;
             this.password = password;
@@ -48,6 +51,7 @@ namespace UserData
             this.BirthDay = DateTime.Parse(date);
             this.Type = type;
             this.Man = man;
+            this.gewicht = gewicht;
             string test = Encoding.Default.GetString(new SHA256Managed().ComputeHash(Encoding.Default.GetBytes(DateTime.UtcNow.Ticks.ToString() + username)));
             makeHashcodeValid(test);
         }
