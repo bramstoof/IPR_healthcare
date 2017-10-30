@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Remote_Healtcare_Console.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Windows.Forms;
 using UserData;
 
 namespace Remote_Healtcare_Console
@@ -207,9 +205,9 @@ namespace Remote_Healtcare_Console
             List<int> lastHeartreate = new List<int>();
 
             int size = heartrates.Count();
-            if (size >= 6)
+            if (size >= 4)
             {
-                for (int x = size - 1; x < size - 5; x++)
+                for (int x = size - 1; x > size - 5; x--)
                 {
                     lastHeartreate.Add(heartrates[x]);
                 }
@@ -351,6 +349,150 @@ namespace Remote_Healtcare_Console
             return (int)heartrates.Average();
         }
 
+        private string rateVO2max(int Vo2Max)
+        {
+            string rate = "";
+
+            int leeftijd = user.getAge();
+            if (user.Man)
+            {
+                if (leeftijd < 30)
+                {
+                    if (Vo2Max < 25)
+                        return "matig";
+                    else if (Vo2Max < 34)
+                        return "redelijk";
+                    else if (Vo2Max < 44)
+                        return "gemiddled";
+                    else if (Vo2Max < 53)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else if (leeftijd < 40) {
+                    if (Vo2Max < 23)
+                        return "matig";
+                    else if (Vo2Max < 31)
+                        return "redelijk";
+                    else if (Vo2Max < 42)
+                        return "gemiddled";
+                    else if (Vo2Max < 50)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+            else if (leeftijd < 50)
+                {
+                    if (Vo2Max < 20)
+                        return "matig";
+                    else if (Vo2Max < 27)
+                        return "redelijk";
+                    else if (Vo2Max < 39)
+                        return "gemiddled";
+                    else if (Vo2Max < 45)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else if (leeftijd < 60)
+                {
+                    if (Vo2Max < 18)
+                        return "matig";
+                    else if (Vo2Max < 25)
+                        return "redelijk";
+                    else if (Vo2Max < 38)
+                        return "gemiddled";
+                    else if (Vo2Max < 43)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else
+                {
+                    if (Vo2Max < 16)
+                        return "matig";
+                    else if (Vo2Max < 23)
+                        return "redelijk";
+                    else if (Vo2Max < 36)
+                        return "gemiddled";
+                    else if (Vo2Max < 41)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+            }
+            else
+            {
+                if (leeftijd < 30)
+                {
+                    if (Vo2Max < 24)
+                        return "matig";
+                    else if (Vo2Max < 31)
+                        return "redelijk";
+                    else if (Vo2Max < 39)
+                        return "gemiddled";
+                    else if (Vo2Max < 50)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else if (leeftijd < 40)
+                {
+                    if (Vo2Max < 20)
+                        return "matig";
+                    else if (Vo2Max < 28)
+                        return "redelijk";
+                    else if (Vo2Max < 37)
+                        return "gemiddled";
+                    else if (Vo2Max < 45)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else if (leeftijd < 50)
+                {
+                    if (Vo2Max < 17)
+                        return "matig";
+                    else if (Vo2Max < 25)
+                        return "redelijk";
+                    else if (Vo2Max < 35)
+                        return "gemiddled";
+                    else if (Vo2Max < 42)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else if (leeftijd < 60)
+                {
+                    if (Vo2Max < 15)
+                        return "matig";
+                    else if (Vo2Max < 22)
+                        return "redelijk";
+                    else if (Vo2Max < 34)
+                        return "gemiddled";
+                    else if (Vo2Max < 40)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+                else
+                {
+                    if (Vo2Max < 12)
+                        return "matig";
+                    else if (Vo2Max < 21)
+                        return "redelijk";
+                    else if (Vo2Max < 33)
+                        return "gemiddled";
+                    else if (Vo2Max < 37)
+                        return "goed";
+                    else
+                        return "geweldig";
+                }
+            }
+
+
+            return rate;
+        }
         public void CalculateVO2MAX()
         {
             double VO2MAX = 0;

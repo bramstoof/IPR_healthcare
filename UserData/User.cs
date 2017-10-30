@@ -52,6 +52,19 @@ namespace UserData
             makeHashcodeValid(test);
         }
 
+        public int getAge()
+        {
+            DateTime timeNow = new DateTime();
+            int age = (int)timeNow.Year - ((int)BirthDay.Year - 1);
+            
+
+            if((BirthDay.Month >= timeNow.Month) && (BirthDay.Day >= timeNow.Day))
+               age++;
+
+
+            return age;
+        }
+
         public string Password
         {
             get { return password; }
