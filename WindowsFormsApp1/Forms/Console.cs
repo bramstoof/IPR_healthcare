@@ -32,6 +32,7 @@ namespace Remote_Healtcare_Console
             combo.Items.Add("Simulator");
             combo.Items.AddRange(SerialPort.GetPortNames());
             checkedListBox_geslacht.SetItemChecked(0, true);
+            
         }
 
         private void BStart_Click(object sender, EventArgs e)
@@ -132,13 +133,12 @@ namespace Remote_Healtcare_Console
 
         private void checkedListBox_geslacht_CheckedChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("You are in the CheckBox.CheckedChanged event.");
-
             if (checkedListBox_geslacht.GetItemCheckState(0) == CheckState.Checked)
-                checkedListBox_geslacht.SetItemChecked(1, false);
-
-            else if(checkedListBox_geslacht.GetItemCheckState(1) == CheckState.Checked)
-                checkedListBox_geslacht.SetItemChecked(0, false);
+                checkedListBox_geslacht.SetItemCheckState(1, CheckState.Unchecked);
+            //checkedListBox_geslacht.SetItemChecked(1, false);
+            else
+            if (checkedListBox_geslacht.GetItemCheckState(1) == CheckState.Checked)
+                checkedListBox_geslacht.SetItemCheckState(0, CheckState.Unchecked);
         }
     }
 }

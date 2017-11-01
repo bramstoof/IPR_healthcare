@@ -139,6 +139,7 @@
             // 
             // checkedListBox_geslacht
             // 
+            this.checkedListBox_geslacht.CheckOnClick = true;
             this.checkedListBox_geslacht.FormattingEnabled = true;
             this.checkedListBox_geslacht.Items.AddRange(new object[] {
             "man",
@@ -147,7 +148,7 @@
             this.checkedListBox_geslacht.Name = "checkedListBox_geslacht";
             this.checkedListBox_geslacht.Size = new System.Drawing.Size(73, 38);
             this.checkedListBox_geslacht.TabIndex = 32;
-            this.checkedListBox_geslacht.CheckOnClick = true;
+            this.checkedListBox_geslacht.SelectedIndexChanged += new System.EventHandler(this.checkedListBox_geslacht_CheckedChanged);
             // 
             // Console
             // 

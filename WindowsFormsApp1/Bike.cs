@@ -139,7 +139,7 @@ namespace Remote_Healtcare_Console
                     {
                         pauzeHeart = true;
                         heartrates.Add(Pulse);
-                        FormAstrand.pulse = Pulse;
+                        FormAstrand.setTussenTijdseHartslag(Pulse);
                     }
 
                     if (seconds % 10 == 1)
@@ -156,6 +156,7 @@ namespace Remote_Healtcare_Console
                     {
                         pauzeHeart = true;
                         heartrates.Add(Pulse);
+                        FormAstrand.setTussenTijdseHartslag(Pulse);
                     }
                     if (seconds % 10 == 1)
                         pauzeHeart = false;
