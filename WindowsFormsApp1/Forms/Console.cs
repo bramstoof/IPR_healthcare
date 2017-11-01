@@ -133,12 +133,18 @@ namespace Remote_Healtcare_Console
 
         private void checkedListBox_geslacht_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkedListBox_geslacht.GetItemCheckState(0) == CheckState.Checked)
+            if (checkedListBox_geslacht.GetSelected(0))
+            {
+                checkedListBox_geslacht.SetItemCheckState(0, CheckState.Checked);
                 checkedListBox_geslacht.SetItemCheckState(1, CheckState.Unchecked);
-            //checkedListBox_geslacht.SetItemChecked(1, false);
+            }
             else
-            if (checkedListBox_geslacht.GetItemCheckState(1) == CheckState.Checked)
+            if (checkedListBox_geslacht.GetSelected(1))
+            {
+                checkedListBox_geslacht.SetItemCheckState(1, CheckState.Checked);
                 checkedListBox_geslacht.SetItemCheckState(0, CheckState.Unchecked);
+            }
+            
         }
     }
 }

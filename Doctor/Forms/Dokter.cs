@@ -32,7 +32,7 @@ namespace Doctor {
                     Awaiting_Patients_Box.Items.Add(user);
             }
 
-            Form searchForm = new Search(users, panel1);
+            Form searchForm = new Search(ref users, panel1, ref client);
             searchForm.TopLevel = false;
             this.panel1.Controls.Add(searchForm);
             searchForm.Show();
