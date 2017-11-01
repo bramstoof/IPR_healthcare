@@ -75,6 +75,7 @@
             this.sessionDate = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.lblFase = new System.Windows.Forms.Label();
+            this.btn_saveSession = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Resistance_Track_Bar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grafiek)).BeginInit();
             this.SuspendLayout();
@@ -528,11 +529,22 @@
             this.lblFase.TabIndex = 69;
             this.lblFase.Text = "fase";
             // 
+            // btn_saveSession
+            // 
+            this.btn_saveSession.Location = new System.Drawing.Point(616, 551);
+            this.btn_saveSession.Name = "btn_saveSession";
+            this.btn_saveSession.Size = new System.Drawing.Size(95, 23);
+            this.btn_saveSession.TabIndex = 70;
+            this.btn_saveSession.Text = "Save session";
+            this.btn_saveSession.UseVisualStyleBackColor = true;
+            this.btn_saveSession.Click += new System.EventHandler(this.btn_saveSession_Click);
+            // 
             // Session
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 624);
+            this.Controls.Add(this.btn_saveSession);
             this.Controls.Add(this.lblFase);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.sessionDate);
@@ -626,5 +638,6 @@
         private System.Windows.Forms.Label sessionDate;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblFase;
+        private System.Windows.Forms.Button btn_saveSession;
     }
 }

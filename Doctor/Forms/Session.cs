@@ -6,6 +6,8 @@ using UserData;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Remote_Healtcare_Console.Forms;
+using System.IO;
+using System.Reflection;
 
 namespace Doctor {
     public partial class Session : Form {
@@ -31,30 +33,17 @@ namespace Doctor {
             InitializeComponent();
             this.patient = patient;
             this.client = client;
+            this.sessionAllData = new List<BikeData>();
 
             if (sessionDate != null) {
                 DateTime daytime = DateTime.Now;
                 sessionDate.Text = daytime.Day + "-" + daytime.Month + "-" + daytime.Year +"\t" + daytime.Hour + ":" + daytime.Minute;
                 Start_Session_Btn.Enabled = true;
                 Stop_Session_Btn.Enabled = false;
+                
 
-                //dynamic request = new {
-                //    id = "reqSession"
-                //};
 
-                //lock (client.ReadAndWriteLock) {
-                //    client.SendMessage(request);
-                //    JObject obj = JObject.Parse(client.ReadMessage());
-                //    if ((string) obj["id"] == "sessiondata") {
-                //        List<BikeData> datas = JsonConvert.DeserializeObject<List<BikeData>>((string)obj["data"]);
-                //        sessionAllData.AddRange(datas);
-                //        foreach (BikeData data in datas) {
-                //            AddToGraphHistory(data);
-                //        }
-                //    }
-                //}
-
-                sessionAllData = new List<BikeData>();
+                
 
                 UpdateThread = new Thread(run);
             }
@@ -390,6 +379,14 @@ namespace Doctor {
                     hashcode = patient.Hashcode
                 }
             });
+        }
+
+        private void btn_saveSession_Click(object sender, EventArgs e)
+        {
+            string currentDir = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            
+            File.WriteAllLines(currentDir,sessionAllData);
+            File.WriteAllLines("C:\\Users\thijs\\Desktop\\school\\TI-17-18\\Periode1\\Proktaak Remote Healthcare\\IPR", sessionAllData);
         }
     }
 }
