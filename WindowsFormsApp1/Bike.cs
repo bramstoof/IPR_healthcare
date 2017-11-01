@@ -21,6 +21,7 @@ namespace Remote_Healtcare_Console
         private double factor;
         private int hartfrequentie =210;
         private int Resistance = 25;
+        private int MaxResistance;
         private bool Busy = true;
         private bool startTest = false;
         private bool AstrandWFAisNotActive = false;
@@ -140,63 +141,76 @@ namespace Remote_Healtcare_Console
                         heartrates.Add(Pulse);
                     }
 
-                    RpmCheck(latestData.Rpm);
-
                     if (seconds % 10 == 1)
                     {
                         pauzeHeart = false;
                         pauze = false;
                     }
-
+                    RpmCheck(latestData.Rpm);
                 }
                 else if (minutes < 6)
                 {
                     FormAstrand.SetFaseText("Test");
                     if (seconds % 15 == 0 && !pauzeHeart)
-                    { 
+                    {
                         pauzeHeart = true;
                         heartrates.Add(Pulse);
                     }
                     if (seconds % 10 == 1)
                         pauzeHeart = false;
 
-                        if (Pulse < 130 && !pauze)
+                    if (Pulse < 130 && !pauze)
                     {
                         pauze = true;
                         waitTime = seconds;
 
                         if (user.Man)
-                            SetResistance(Resistance += 25);
+                            SetResistance(Resistance += 50);
                         else
-                            SetResistance(Resistance += 15);
+                            SetResistance(Resistance += 25);
                         timeTestDone += 2;
                     }
                     if (pauze && waitTime + 10 == seconds)
-                            pauze = false;
+                        pauze = false;
 
                     RpmCheck(latestData.Rpm);
+                }
+                else if (minutes < 7)
+                {
+
+                    FormAstrand.SetFaseText("cooling down");
+                    if (seconds % 10 == 0 && !pauze && Resistance >= 65)
+                        SetResistance(Resistance -= 25);
+
+                    else if (seconds % 10 == 1)
+                    {
+                        pauzeHeart = false;
+                        pauze = false;
+
+                    }
                 }
                 else
                 {
                     if (CheckStadyState())
                     {
-                        FormAstrand.SetFaseText("Cooling down");
-                        AverageHeartBeatRate();
+                        //stady state berijkt
                         CalculateVO2MAX();
-                        SetResistance(25);
-                        Busy = false;
+                        RateVO2max();
                     }
                     else
                     {
-                        FormAstrand.SetFaseText("geen stady state berijkt");
-                        Busy = false;
+                        // stady statte niet berijkt
+
                     }
+                    Busy = false;
                 }
                 if (Pulse > hartfrequentie)
                 {
                     Busy = false;
                     FormAstrand.SetFaseText("hartslag te hoog");
                 }
+                if (MaxResistance < Resistance)
+                    MaxResistance = Resistance;
             }
         }
 
@@ -349,8 +363,9 @@ namespace Remote_Healtcare_Console
             return (int)heartrates.Average();
         }
 
-        private string RateVO2max(int Vo2Max)
+        private string RateVO2max()
         {
+            double Vo2Max = CalculateVO2MAX();
             int leeftijd = user.getAge();
             if (user.Man)
             {
@@ -488,19 +503,24 @@ namespace Remote_Healtcare_Console
                 }
             }
         }
-        public void CalculateVO2MAX()
+        public double CalculateVO2MAX()
         {
-            double VO2MAX = 0;
-            if(user.Man)
+            double VO2MAX=0;
+            double VO2=0;
+
+            if (user.Man)
             {
-                VO2MAX = (174.2 * Resistance + 4020) / (103.2 * AverageHeartBeatRate() - 6299);
-                VO2MAX *= factor;
+                VO2 = (0.00212 * (MaxResistance * 6) + 0.299) / (0.769 * AverageHeartBeatRate() - 48.5);
             }
             else
             {
-                VO2MAX = (163.8 * Resistance + 3780) / (104.4 * AverageHeartBeatRate() - 7514);
-                VO2MAX *= factor;
+                VO2 = (0.00193 * (MaxResistance * 6) + 0.326) / (0.769 * AverageHeartBeatRate() - 56.1);
             }
+            if(user.getAge() >= 35)
+                VO2 = VO2 * factor;
+            
+             VO2MAX = VO2 * (1000 / user.gewicht);
+            return VO2MAX;
         }
 
         public double CorrectieFactorLeeftijd(int leeftijd)
