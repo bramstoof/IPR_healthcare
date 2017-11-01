@@ -159,6 +159,20 @@ namespace Remote_Healtcare_Console.Forms
             lbl_BPM.Parent = pictureBox1;
             lbl_BPM.Location = posBPM;
             lbl_BPM.BackColor = Color.Transparent;
+
+            //making lblTussentijdPuls transparent
+            var posTTPDesc = this.PointToScreen(lblTussentijdPuls.Location);
+            posTTPDesc = pictureBox1.PointToClient(posTTPDesc);
+            lblTussentijdPuls.Parent = pictureBox1;
+            lblTussentijdPuls.Location = posTTPDesc;
+            lblTussentijdPuls.BackColor = Color.Transparent;
+
+            //making TussentijdPuls transparent
+            var posTTP = this.PointToScreen(TussentijdPuls.Location);
+            posTTP = pictureBox1.PointToClient(posTTP);
+            TussentijdPuls.Parent = pictureBox1;
+            TussentijdPuls.Location = posTTP;
+            TussentijdPuls.BackColor = Color.Transparent;
         }
 
         private void btn_startTest_Click(object sender, EventArgs e)
@@ -250,6 +264,18 @@ namespace Remote_Healtcare_Console.Forms
                 lbl_Watt.Text = watt.ToString(); ;
                 lbl_BPM.Text = BPM.ToString(); ;
                 lbl_RPMActual.Text = RPM.ToString(); ;
+            }
+        }
+
+        public void setTussenTijdseHartslag(int hartslagTussenTijds)
+        {
+            if(TussentijdPuls.InvokeRequired)
+            {
+                TussentijdPuls.BeginInvoke((MethodInvoker)delegate () { TussentijdPuls.Text = hartslagTussenTijds.ToString(); ; });
+            }
+            else
+            {
+                TussentijdPuls.Text = hartslagTussenTijds.ToString();
             }
         }
 

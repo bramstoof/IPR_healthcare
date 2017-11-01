@@ -147,6 +147,7 @@
             this.checkedListBox_geslacht.Name = "checkedListBox_geslacht";
             this.checkedListBox_geslacht.Size = new System.Drawing.Size(73, 38);
             this.checkedListBox_geslacht.TabIndex = 32;
+            this.checkedListBox_geslacht.CheckOnClick = true;
             // 
             // Console
             // 
