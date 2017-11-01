@@ -43,6 +43,18 @@ namespace Doctor.Forms {
             }
         }
 
+        private void DataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (dataGridView1.CurrentCell.RowIndex >= 0)
+            {
+                this.Hide();
+                Form userForm = new UserInfo((User)dataGridView1.CurrentRow.DataBoundItem, this, ref client, panel);
+                userForm.TopLevel = false;
+                panel.Controls.Add(userForm);
+                userForm.Show();
+            }
+        }
+
         private void label2_Click(object sender, EventArgs e) {
 
         }
