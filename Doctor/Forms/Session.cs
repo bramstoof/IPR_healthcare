@@ -23,6 +23,7 @@ namespace Doctor {
         private List<int> resistancehistory;
         private List<int> energyhistory;
         private List<int> generatedhistory;
+        private DateTime sessionDateTime;
 
         private object sessionLock = new object();
 
@@ -34,16 +35,13 @@ namespace Doctor {
             this.patient = patient;
             this.client = client;
             this.sessionAllData = new List<BikeData>();
+            this.sessionDateTime = DateTime.UtcNow;
 
             if (sessionDate != null) {
                 DateTime daytime = DateTime.Now;
                 sessionDate.Text = daytime.Day + "-" + daytime.Month + "-" + daytime.Year +"\t" + daytime.Hour + ":" + daytime.Minute;
                 Start_Session_Btn.Enabled = true;
                 Stop_Session_Btn.Enabled = false;
-                
-
-
-                
 
                 UpdateThread = new Thread(run);
             }
@@ -293,6 +291,8 @@ namespace Doctor {
         }
 
 
+
+
         private void AddToGraphHistory(BikeData bike) {
             lock (sessionLock) {
                 pulsehistory.Add(bike.Pulse);
@@ -383,10 +383,30 @@ namespace Doctor {
 
         private void btn_saveSession_Click(object sender, EventArgs e)
         {
-            string currentDir = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            
-            File.WriteAllLines(currentDir,sessionAllData);
-            File.WriteAllLines("C:\\Users\thijs\\Desktop\\school\\TI-17-18\\Periode1\\Proktaak Remote Healthcare\\IPR", sessionAllData);
+            SaveSessionToFile();
+        }
+
+        public void SaveSessionToFile()
+        {
+            string pathToUserDir = Directory.GetCurrentDirectory() + @"\ClientData\" + patient.Hashcode + @"\";
+            string pathToSessionFile = Path.Combine(pathToUserDir, sessionDateTime.ToString().Replace(":", "-") + ".json");
+            if (!Directory.Exists(pathToUserDir))
+            {
+                Directory.CreateDirectory(pathToUserDir);
+            }
+            else
+            {
+                File.Create(pathToSessionFile);
+            }
+
+            try
+            {
+                File.WriteAllText(pathToSessionFile, JsonConvert.SerializeObject(sessionAllData));
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
         }
     }
 }

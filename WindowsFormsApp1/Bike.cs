@@ -138,6 +138,7 @@ namespace Remote_Healtcare_Console
                     {
                         pauzeHeart = true;
                         heartrates.Add(Pulse);
+                        FormAstrand.pulse = Pulse;
                     }
 
                     RpmCheck(latestData.Rpm);
