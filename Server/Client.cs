@@ -161,6 +161,9 @@ namespace Server {
                 case "disconnect":
                     closeStream();
                     break;
+                case "Ending":
+                    new Thread(() => Ending(obj)).Start();
+                    break;
                     
             }
         }
@@ -412,6 +415,22 @@ namespace Server {
                         else {
                             session.LatestData.RemoveAt(0);
                             session.LatestData.Add(dataConverted);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Ending(JObject data)
+        { 
+            lock (connectedClientsLock) {
+                foreach (Client client in connectedClients) {
+                    if (client.User.Hashcode == (string) data["hashcode"]) {
+                        lock (client.sessionLock) {
+                            if (client.session != null) 
+                                writeMessage(data);
+                            
+                            break;
                         }
                     }
                 }

@@ -94,7 +94,8 @@ namespace Doctor {
                     obj = JObject.Parse(message);
                 }
 
-                switch ((string)obj["id"]) {
+                switch ((string)obj["id"])
+                {
                     case "clientDisconnected":
                         MessageBox.Show($"{patient.FullName} disconnected");
                         this.Hide();
@@ -109,13 +110,19 @@ namespace Doctor {
                         List<BikeData> latest = JsonConvert.DeserializeObject<List<BikeData>>((string)obj["data"]);
                         updateAll(latest[latest.Count - 1]);
 
-                        foreach (BikeData data in latest) {
-                            if (!sessionAllData.Contains(data)) {
+                        foreach (BikeData data in latest)
+                        {
+                            if (!sessionAllData.Contains(data))
+                            {
                                 sessionAllData.Add(data);
                                 AddToGraphHistory(data);
                             }
                         }
                         break;
+                    case "Ending":
+                        //JsonConvert.DeserializeObject<List<string>>((string)obj["data"]);
+                        break;
+                
                 }
                 Thread.Sleep(750);
             }
