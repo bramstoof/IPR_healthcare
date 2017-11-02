@@ -388,7 +388,10 @@ namespace Doctor {
 
         public void SaveSessionToFile()
         {
-            string pathToUserDir = Directory.GetCurrentDirectory() + @"\ClientData\" + patient.Hashcode + @"\";
+            string myDocuments = Environment.GetFolderPath
+    (           Environment.SpecialFolder.MyDocuments);
+            string pathToUserDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\ClientData\" + @"\";
+            //string pathToUserDir = Directory.GetCurrentDirectory() + @"\ClientData\" + /*patient.Hashcode +*/ @"\";
             string pathToSessionFile = Path.Combine(pathToUserDir, sessionDateTime.ToString().Replace(":", "-") + ".json");
             if (!Directory.Exists(pathToUserDir))
             {
@@ -401,7 +404,11 @@ namespace Doctor {
 
             try
             {
-                File.WriteAllText(pathToSessionFile, JsonConvert.SerializeObject(sessionAllData));
+                string sessionDatePath = sessionDateTime.ToString().Replace(":", "-") + ".json";
+                //using (var stream = new StreamWriter(sessionDateTime.ToString().Replace(":", "-") + ".json"))
+                using (var stream = new StreamWriter(Path.Combine(myDocuments, sessionDatePath)))
+                    stream.Write(JsonConvert.SerializeObject(sessionAllData));
+                    //File.WriteAllText(pathToSessionFile, JsonConvert.SerializeObject(sessionAllData));
             }
             catch (IOException e)
             {
