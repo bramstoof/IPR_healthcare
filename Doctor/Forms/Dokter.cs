@@ -26,6 +26,7 @@ namespace Doctor {
 
             string data = client.ReadMessage();
             users = (List<User>)((JArray)JsonConvert.DeserializeObject(data)).ToObject(typeof(List<User>));
+            //.Add(new User());
 
             foreach (User user in users) {
                 if (user.Type == UserType.Client)
