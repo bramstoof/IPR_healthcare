@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Remote_Healtcare_Console.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -34,6 +35,9 @@ namespace Remote_Healtcare_Console
         private int waitTime;
         private int pulse { get;  set; }
         private bool pauzeHeart;
+        private double vo2max;
+        private string rate;
+        private bool quickTest = true;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -100,6 +104,27 @@ namespace Remote_Healtcare_Console
         {
             if (Busy)
             {
+                if (quickTest == true)
+                {
+                    MaxResistance = 200;
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    heartrates.Add(140);
+                    //stady state berijkt
+                    vo2max = Math.Round(CalculateVO2MAX(),3);
+                    //CalculateVO2MAX();
+                    rate = RateVO2max();
+                    FormAstrand.succesfullAstrandTest(
+                        "Je hebt de training voltooid!\n Je score was: " 
+                        + rate + "\n Je VO2max is: " 
+                        + vo2max + " ml / kg / min", "goed gedaan!");
+                    Busy = false;
+                }
                 int Pulse;
                 //BikeData latestData = RecordedData.Last();
                 if (latestData.Pulse == 0)
@@ -183,7 +208,7 @@ namespace Remote_Healtcare_Console
                 }
                 else if (minutes < 7)
                 {
-
+                    RpmCheck(55);
                     FormAstrand.SetFaseText("cooling down");
                     if (seconds % 10 == 0 && !pauze && Resistance >= 65)
                         SetResistance(Resistance -= 25);
@@ -200,20 +225,24 @@ namespace Remote_Healtcare_Console
                     if (CheckStadyState())
                     {
                         //stady state berijkt
-                        CalculateVO2MAX();
-                        RateVO2max();
+                        vo2max = CalculateVO2MAX();
+                        //CalculateVO2MAX();
+                        rate = RateVO2max();
+                        //RateVO2max();
+                        FormAstrand.succesfullAstrandTest(
+                            "Je hebt de training voltooid!\n Je score was:" +rate + "\n Je VO2max is: " +vo2max + " ml/kg/min", "goed gedaan!");
                     }
                     else
                     {
                         // stady statte niet berijkt
-
+                        FormAstrand.succesfullAstrandTest("Je hebt geen steady state bereikt \n Daarom kon geen betrouwbare VO2max worden berekend", "helaas");
                     }
                     Busy = false;
                 }
                 if (Pulse > hartfrequentie)
                 {
                     Busy = false;
-                    FormAstrand.SetFaseText("hartslag te hoog");
+                    FormAstrand.succesfullAstrandTest("Hartslag was te hoog!", "Mislukkeling!");
                 }
                 if (MaxResistance < Resistance)
                     MaxResistance = Resistance;
@@ -240,12 +269,12 @@ namespace Remote_Healtcare_Console
         }
 
         private void RpmCheck(int rpm) {
-            if (rpm <= 50)
+            if (rpm < 50)
             {
                 //go faster
                 FormAstrand.resistanceUp();
             }
-            else if (rpm >= 60)
+            else if (rpm > 60)
             {
                 //go slower
                 FormAstrand.resistanceDown();

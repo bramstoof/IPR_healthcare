@@ -235,13 +235,17 @@ namespace Server {
         }
 
         private void getOldSessionsName(JObject data) {
-            string path = Directory.GetCurrentDirectory() + $@"\data\{data["hashcode"]}";
+            //string path = Directory.GetCurrentDirectory()/* + $@"\data\{data["hashcode"]}"*/;
+            //string path = "C:\\Users\thijs\\Desktop\\school\\TI-17-18\\Periode 1\\Proktaak Remote Healthcare\\IPR\\Doctor\\bin\\Debug";
+            string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string path = myDocuments;
+            var ext = new List<string> { ".json" };
 
             if (Directory.Exists(path)) {
-                dynamic response = new {
+                dynamic response = new
+                {
                     status = "alloldfiles",
-                    data = Directory.GetFiles(path)
-                };
+                    data = Directory.GetFiles(path).Where(s => ext.Contains(Path.GetExtension(s)))};
                 writeMessage(response);
             }
             else {
@@ -257,6 +261,7 @@ namespace Server {
             string file = (string)data["file"];
 
             string path = Directory.GetCurrentDirectory() + $@"\data\{hashcode}\{file}";
+            
             if (File.Exists(path)) {
                 try {
                     dynamic response = new {

@@ -288,5 +288,10 @@ namespace Remote_Healtcare_Console.Forms
             else
                 MessageBox.Show("Geen geldige waarde", "Er ging iets fout", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        public void succesfullAstrandTest(string message, string title)
+        {
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
