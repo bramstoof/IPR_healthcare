@@ -100,7 +100,6 @@ namespace Remote_Healtcare_Console
         {
             if (Busy)
             {
-                GoodEnding(34, "jaja het werkt");
                 int Pulse;
                 //BikeData latestData = RecordedData.Last();
                 if (latestData.Pulse == 0)
@@ -200,7 +199,6 @@ namespace Remote_Healtcare_Console
                 {
                     if (CheckStadyState())
                     {
-                        GoodEnding();
                         //stady state berijkt
                         CalculateVO2MAX();
                         RateVO2max();
@@ -364,48 +362,6 @@ namespace Remote_Healtcare_Console
                 }
             });
             
-        }
-
-        private void GoodEnding()
-        {
-            client.SendMessage(new
-            {
-                id = "Ending",
-                data = new
-                {
-                    ending = "good",
-                    score = CalculateVO2MAX(),
-                    status = RateVO2max()
-
-        }
-            });
-        }
-
-        private void GoodEnding(int cijfer, string tekst)
-        {
-            client.SendMessage(new
-            {
-                id = "Ending",
-                data = new
-                {
-                    ending = "good",
-                    score = cijfer,
-                    status = tekst
-
-                }
-            });
-        }
-
-        private void WrongEnding()
-        {
-            client.SendMessage(new
-            {
-                id = "Ending",
-                data = new
-                {
-                    ending = "wrong"
-                }
-            });
         }
 
         public int AverageHeartBeatRate()
