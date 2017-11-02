@@ -37,7 +37,7 @@ namespace Remote_Healtcare_Console
         private bool pauzeHeart;
         private double vo2max;
         private string rate;
-        private bool quickTest = true;
+        private bool quickTest = false;
 
         public Bike(string port, User user, Console console, ref Client client) : base(console) {
             this.client = client;
@@ -228,12 +228,12 @@ namespace Remote_Healtcare_Console
                     if (CheckStadyState())
                     {
                         //stady state berijkt
-                        vo2max = CalculateVO2MAX();
+                        vo2max = Math.Round(CalculateVO2MAX(),3);
                         //CalculateVO2MAX();
                         rate = RateVO2max();
                         //RateVO2max();
                         FormAstrand.succesfullAstrandTest(
-                            "Je hebt de training voltooid!\n Je score was:" +rate + "\n Je VO2max is: " +vo2max + " ml/kg/min", "goed gedaan!");
+                            "Je hebt de training voltooid!\n Je score was: " +rate + "\n Je VO2max is: " +vo2max + " ml/kg/min", "goed gedaan!");
                     }
                     else
                     {
