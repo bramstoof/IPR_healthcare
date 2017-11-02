@@ -100,7 +100,7 @@ namespace Remote_Healtcare_Console
         {
             if (Busy)
             {
-                //GoodEnding(34, "jaja het werkt");
+                GoodEnding(34, "jaja het werkt");
                 int Pulse;
                 //BikeData latestData = RecordedData.Last();
                 if (latestData.Pulse == 0)
