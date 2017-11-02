@@ -100,9 +100,13 @@ namespace Remote_Healtcare_Console
         {
             if (Busy)
             {
+                int Pulse;
                 //BikeData latestData = RecordedData.Last();
-                //int Pulse = latestData.Pulse;
-                int Pulse = FormAstrand.pulse; // aanpassen via GUI !!!!!!!
+                if (latestData.Pulse == 0)
+                    Pulse = 140;
+                else
+                    Pulse = latestData.Pulse;
+                
                 int minutes = latestData.Time.Minutes;
                 int seconds = latestData.Time.Seconds;
                 if (Pulse > hartfrequentie)
@@ -512,11 +516,11 @@ namespace Remote_Healtcare_Console
 
             if (user.Man)
             {
-                VO2 = (0.00212 * (MaxResistance * 6) + 0.299) / (0.769 * AverageHeartBeatRate() - 48.5);
+                VO2 = ((0.00212 * (MaxResistance * 6) + 0.299) / (0.769 * AverageHeartBeatRate() - 48.5)) * 100;
             }
             else
             {
-                VO2 = (0.00193 * (MaxResistance * 6) + 0.326) / (0.769 * AverageHeartBeatRate() - 56.1);
+                VO2 = ((0.00193 * (MaxResistance * 6) + 0.326) / (0.769 * AverageHeartBeatRate() - 56.1)) * 100;
             }
             if(user.getAge() >= 35)
                 VO2 = VO2 * factor;
