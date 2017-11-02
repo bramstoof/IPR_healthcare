@@ -210,8 +210,11 @@ namespace Remote_Healtcare_Console
                 {
                     RpmCheck(55);
                     FormAstrand.SetFaseText("cooling down");
-                    if (seconds % 10 == 0 && !pauze && Resistance >= 65)
+                    if (seconds % 4 == 0 && !pauze && Resistance >= 65)
+                    {
+                        pauze = true;
                         SetResistance(Resistance -= 25);
+                    }
 
                     else if (seconds % 10 == 1)
                     {

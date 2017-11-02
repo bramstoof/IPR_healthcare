@@ -327,9 +327,9 @@
             this.TussentijdPuls.Location = new System.Drawing.Point(387, 374);
             this.TussentijdPuls.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TussentijdPuls.Name = "TussentijdPuls";
-            this.TussentijdPuls.Size = new System.Drawing.Size(155, 41);
+            this.TussentijdPuls.Size = new System.Drawing.Size(28, 41);
             this.TussentijdPuls.TabIndex = 23;
-            this.TussentijdPuls.Text = "[666 BPM]";
+            this.TussentijdPuls.Text = "-";
             // 
             // lblTussentijdPuls
             // 
