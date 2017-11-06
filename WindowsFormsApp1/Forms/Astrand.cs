@@ -247,22 +247,22 @@ namespace Remote_Healtcare_Console.Forms
             {
                 //lbl_currentFase.BeginInvoke((MethodInvoker)delegate () { lbl_currentFase.Text = fase; ; });
                 lbl_TimeLeft.BeginInvoke((MethodInvoker)delegate () { lbl_TimeLeft.Text = tijd; ; });
-                lbl_speed.BeginInvoke((MethodInvoker)delegate () { lbl_speed.Text = snelheid.ToString(); ; });
-                lbl_weerstand.BeginInvoke((MethodInvoker)delegate () { lbl_weerstand.Text = weerstand.ToString(); ; });
-                lbl_energie.BeginInvoke((MethodInvoker)delegate () { lbl_energie.Text = energie.ToString(); ; });
-                lbl_Watt.BeginInvoke((MethodInvoker)delegate () { lbl_Watt.Text = watt.ToString(); ; });
-                lbl_BPM.BeginInvoke((MethodInvoker)delegate () { lbl_BPM.Text = BPM.ToString(); ; });
+                lbl_speed.BeginInvoke((MethodInvoker)delegate () { lbl_speed.Text = snelheid.ToString() + " km/h"; ; });
+                lbl_weerstand.BeginInvoke((MethodInvoker)delegate () { lbl_weerstand.Text = weerstand.ToString()+ " W"; ; });
+                lbl_energie.BeginInvoke((MethodInvoker)delegate () { lbl_energie.Text = energie.ToString() + " kJoule"; ; });
+                lbl_Watt.BeginInvoke((MethodInvoker)delegate () { lbl_Watt.Text = watt.ToString() + " W"; ; });
+                lbl_BPM.BeginInvoke((MethodInvoker)delegate () { lbl_BPM.Text = BPM.ToString() + " BPM"; ; });
                 lbl_RPMActual.BeginInvoke((MethodInvoker)delegate () { lbl_RPMActual.Text = RPM.ToString(); ; });
             }
             else
             {
                 //lbl_currentFase.Text = fase; ;
                 lbl_TimeLeft.Text = tijd; ;
-                lbl_speed.Text = snelheid.ToString(); ;
-                lbl_weerstand.Text = weerstand.ToString(); ;
-                lbl_energie.Text = energie.ToString(); ;
-                lbl_Watt.Text = watt.ToString(); ;
-                lbl_BPM.Text = BPM.ToString(); ;
+                lbl_speed.Text = snelheid.ToString() + " km/h"; ;
+                lbl_weerstand.Text = weerstand.ToString() + " W"; ;
+                lbl_energie.Text = energie.ToString() + " kJoule"; ;
+                lbl_Watt.Text = watt.ToString() + " W"; ;
+                lbl_BPM.Text = BPM.ToString() + " BPM"; ;
                 lbl_RPMActual.Text = RPM.ToString(); ;
             }
         }
@@ -271,11 +271,11 @@ namespace Remote_Healtcare_Console.Forms
         {
             if(TussentijdPuls.InvokeRequired)
             {
-                TussentijdPuls.BeginInvoke((MethodInvoker)delegate () { TussentijdPuls.Text = hartslagTussenTijds.ToString(); ; });
+                TussentijdPuls.BeginInvoke((MethodInvoker)delegate () { TussentijdPuls.Text = hartslagTussenTijds.ToString() + " BPM"; ; });
             }
             else
             {
-                TussentijdPuls.Text = hartslagTussenTijds.ToString();
+                TussentijdPuls.Text = hartslagTussenTijds.ToString() + " BPM";
             }
         }
 
